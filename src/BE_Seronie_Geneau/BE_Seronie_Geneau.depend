@@ -33,13 +33,20 @@
 	<windows.h>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 1589808669 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\board.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
 
+<<<<<<< Updated upstream
 1589810948 c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\core_simulation.h
+=======
+1589810921 c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\core_simulation.h
+>>>>>>> Stashed changes
 	<iostream>
 	<string>
 	<thread>
@@ -53,15 +60,19 @@
 	<string.h>
 	"core_simulation.h"
 
+<<<<<<< Updated upstream
 1589799550 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\core_simulation.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
 
+=======
+>>>>>>> Stashed changes
 1589808669 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\mydevices.cpp
 	"mydevices.h"
 	<windows.h>
 
+<<<<<<< Updated upstream
 1589799550 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\sketch_ino.cpp
 	<unistd.h>
 	"core_simulation.h"
@@ -81,4 +92,6 @@
 	<mutex>
 	<windows.h>
 
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
