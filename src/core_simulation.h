@@ -18,6 +18,8 @@ using namespace std;
 
 enum typeio {OUTPUT, INPUT2};
 enum typetest {test1, test2};
+enum typetest {test3, test4};
+
 // exceptions gerees
 enum excep {SPEED, INOUT, ADDRESS, SIZEE, EMPTY};
 class BoardException{
