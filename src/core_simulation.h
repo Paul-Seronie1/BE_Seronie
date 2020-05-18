@@ -18,7 +18,11 @@ using namespace std;
 
 enum typeio {OUTPUT, INPUT2};
 
-int Paul= int Beau;
+int = int Beau;
+
+TESSSSSSSSSSSSSSSSTTTT§==§=§
+
+§§KFKFKKDLDDDDDSAADSDSAG
 
 
 
