@@ -18,12 +18,10 @@ using namespace std;
 
 enum typeio {OUTPUT, INPUT2};
 
+
 int = int Beau;
 
-TESSSSSSSSSSSSSSSSTTTT§==§=§
-
-§§KFKFKKDLDDDDDSAADSDSAG
-
+enum typetest {test1, test2};
 
 
 
