@@ -1,6 +1,6 @@
-
 #include "mydevices.h"
-
+#include <windows.h>
+#define sleep(x) Sleep(1000 * (x))
 using namespace std;
 
 //classe AnalogSensorTemperature
