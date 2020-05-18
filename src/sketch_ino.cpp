@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include "core_simulation.h"
-
+#include <windows.h>
+#define sleep(x) Sleep(1000 * (x))
 // la fonction d'initialisation d'arduino
 void Board::setup(){
   // on configure la vitesse de la liaison
@@ -36,7 +37,7 @@ void Board::loop(){
   else
     digitalWrite(0,LOW);
   bascule=1-bascule;
-  
+
 }
 
 
