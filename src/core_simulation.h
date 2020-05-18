@@ -17,8 +17,12 @@
 using namespace std;
 
 enum typeio {OUTPUT, INPUT2};
+
+
+int = int Beau;
+
 enum typetest {test1, test2};
-int Paul= int Beau;
+
 
 
 // exceptions gerees
