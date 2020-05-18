@@ -23,12 +23,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="../board.cpp" />
-		<Unit filename="../core_simulation.cpp" />
-		<Unit filename="../core_simulation.h" />
-		<Unit filename="../mydevices.cpp" />
-		<Unit filename="../mydevices.h" />
-		<Unit filename="../sketch_ino.cpp" />
+		<Unit filename="board.cpp" />
+		<Unit filename="core_simulation.cpp" />
+		<Unit filename="core_simulation.h" />
+		<Unit filename="mydevices.cpp" />
+		<Unit filename="mydevices.h" />
+		<Unit filename="sketch_ino.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
