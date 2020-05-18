@@ -5,7 +5,7 @@
 #include <string>
 #include <thread>
 #include <mutex>
-
+#include <windows.h>
 #define DELAY 3
 #define TEMP 22
 #define HIGH 1
@@ -19,7 +19,7 @@ using namespace std;
 enum typeio {OUTPUT, INPUT};
 
 // exceptions gerees
-enum excep {SPEED, INOUT, ADDRESS, SIZE, EMPTY};
+enum excep {SPEED, INOUT, ADDRESS, SIZEE, EMPTY};
 class BoardException{
 protected:
     // numero de l'exception
@@ -102,7 +102,7 @@ public:
   Terminal Serial;
     // threads representant chaque senseur/actionneur sur le bus I2C
   thread *tabthreadbus[MAX_I2C_DEVICES];
-    
+
 // simulation de la boucle de controle arduino
     void run();
   // accroachage d'un senseur/actionneur à une pin
