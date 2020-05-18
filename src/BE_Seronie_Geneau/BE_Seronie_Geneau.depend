@@ -32,3 +32,36 @@
 	"core_simulation.h"
 	<windows.h>
 
+1589797671 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\board.cpp
+	"core_simulation.h"
+	"mydevices.h"
+	<windows.h>
+
+1589797405 c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\core_simulation.h
+	<iostream>
+	<string>
+	<thread>
+	<mutex>
+	<windows.h>
+
+1589797612 c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\mydevices.h
+	<iostream>
+	<thread>
+	<unistd.h>
+	<string.h>
+	"core_simulation.h"
+
+1589797723 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\core_simulation.cpp
+	"core_simulation.h"
+	"mydevices.h"
+	<windows.h>
+
+1589797739 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\mydevices.cpp
+	"mydevices.h"
+	<windows.h>
+
+1589797821 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\sketch_ino.cpp
+	<unistd.h>
+	"core_simulation.h"
+	<windows.h>
+
