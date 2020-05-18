@@ -144,7 +144,7 @@ void Board::digitalWrite(int i, int l){
 
 int Board::digitalRead(int i){
   int   result=0;
-  if (stateio[i]==INPUT)
+  if (stateio[i]==INPUT2)
     result= io[i];
   else
     throw BoardException(INOUT);
@@ -160,7 +160,7 @@ void Board::analogWrite(int i, int l){
 
 int Board::analogRead(int i){
   int   result=0;
-  if (stateio[i]==INPUT)
+  if (stateio[i]==INPUT2)
     result= io[i];
   else
     throw BoardException(INOUT);
