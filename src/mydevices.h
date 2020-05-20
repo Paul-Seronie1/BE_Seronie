@@ -25,6 +25,17 @@ public:
   virtual void run();
 };
 
+class TensionSensor: public Device {
+
+private:
+    int val;
+
+public:
+    int TensionSensor(int v);
+    virtual void run();
+
+};
+
 // exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
 class DigitalActuatorLED: public Device {
 private:
