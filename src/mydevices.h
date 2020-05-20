@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "core_simulation.h"
-
+#define MAXVRPM 5500
 
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
 class AnalogSensorTemperature: public Device {
@@ -25,15 +25,33 @@ public:
   virtual void run();
 };
 
+//Capteur de tension (ou plus communément Voltmètre)
 class TensionSensor: public Device {
 
 private:
+    //valeur de la tension mesurée
     int val;
+    //temps entree deux prises de valeurs
+    int temps;
 
 public:
-    int TensionSensor(int v);
+    //constructeur
+    TensionSensor(int v, int t);
     virtual void run();
+};
 
+class Ventilator: public Device {
+
+private:
+    int speed;
+    bool mode; //0 auto vs 1 manual
+    int temps;
+
+public:
+    Ventilator(bool m, int t);
+    int getSpeed();
+    void setSpeed(int s, int temp, float tension);
+    virtual void run();
 };
 
 // exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
