@@ -17,6 +17,16 @@ void AnalogSensorTemperature::run(){
   }
 }
 
+TensionSensor::TensionSensor(int v):Device(),val(v)
+{
+}
+
+void TensionSensor::run()
+{
+    while(1)
+    {
+    }
+}
 //classe DigitalActuatorLED
 DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
 }
