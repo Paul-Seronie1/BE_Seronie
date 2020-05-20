@@ -18,15 +18,6 @@ using namespace std;
 
 enum typeio {OUTPUT, INPUT2};
 
-int = int Beau;
-
-TESSSSSSSSSSSSSSSSTTTT§==§=§
-
-§§KFKFKKDLDDDDDSAADSDSAG
-
-
-
-
 // exceptions gerees
 enum excep {SPEED, INOUT, ADDRESS, SIZEE, EMPTY};
 class BoardException{
