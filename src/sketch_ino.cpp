@@ -8,13 +8,16 @@ void Board::setup(){
   Serial.begin(9600);
 // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
   pinMode(1,INPUT2);
+  pinMode(2, INPUT2);
   pinMode(0,OUTPUT);
+  pinMode(3, OUTPUT);
 }
 
 // la boucle de controle arduino
 void Board::loop(){
   char buf[100];
   int val;
+  int volt;
   static int cpt=0;
   static int bascule=0;
   int i=0;
@@ -22,6 +25,9 @@ void Board::loop(){
     // lecture sur la pin 1 : capteur de temperature
     val=analogRead(1);
     sprintf(buf,"temperature %d",val);
+    Serial.println(buf);
+    volt=analogRead(2);
+    sprintf(buf,"tension %d",volt);
     Serial.println(buf);
     if(cpt%5==0){
         // tous les 5 fois on affiche sur l ecran la temperature
@@ -39,5 +45,3 @@ void Board::loop(){
   bascule=1-bascule;
 
 }
-
-
