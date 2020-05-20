@@ -18,16 +18,8 @@ using namespace std;
 
 enum typeio {OUTPUT, INPUT2};
 
-<<<<<<< HEAD
-=======
-
-int = int Beau;
-
 enum typetest {test1, test2};
 
-
-
->>>>>>> 3be29e5ce98c1725ba38f94bae897a5c578536c2
 // exceptions gerees
 enum excep {SPEED, INOUT, ADDRESS, SIZEE, EMPTY};
 class BoardException{
@@ -136,5 +128,3 @@ public:
 };
 
 #endif
-
-
