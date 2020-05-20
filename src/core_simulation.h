@@ -18,12 +18,9 @@ using namespace std;
 
 enum typeio {OUTPUT, INPUT2};
 
-
 int = int Beau;
 
 enum typetest {test1, test2};
-
-
 
 // exceptions gerees
 enum excep {SPEED, INOUT, ADDRESS, SIZEE, EMPTY};
