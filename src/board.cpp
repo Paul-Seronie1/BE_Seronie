@@ -12,7 +12,7 @@ int main(){
   TensionSensor voltmetre(3, DELAY);
   Ventilator ventilo(0, DELAY);
 
-  ventilo.setSpeed(0, 110, 1.5);
+  ventilo.setSpeed(0, 78, 1.5);
 
   // branchement des capteurs actionneurs
   esp8266.pin(2, voltmetre);
