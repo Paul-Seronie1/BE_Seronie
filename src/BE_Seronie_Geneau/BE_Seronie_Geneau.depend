@@ -54,8 +54,12 @@
 	"mydevices.h"
 	<windows.h>
 
+<<<<<<< HEAD
 1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
 >>>>>>> f2561f3132a132c24a8246fa939055825705ee44
+=======
+1590247954 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
+>>>>>>> 3447d498d63d0dbcc728f59a3eebe26b72d0c2d9
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
@@ -76,7 +80,7 @@
 
 1590246845 ated upstream
 
-1590247713 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
+1590247954 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
 	<thread>
 	<unistd.h>
 	<string.h>
@@ -97,9 +101,10 @@
 
 1589967180 D
 
-1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
+1590247954 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
 	<unistd.h>
 	"core_simulation.h"
+	<windows.h>
 
 1590243428 nch_Teo
 	<unistd.h>
