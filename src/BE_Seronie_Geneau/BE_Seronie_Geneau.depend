@@ -1,10 +1,18 @@
 # depslib dependency file v1.0
+<<<<<<< HEAD
 1590247884 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
+=======
+1590245849 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
+>>>>>>> f2561f3132a132c24a8246fa939055825705ee44
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
 
+<<<<<<< HEAD
 1590246896 c:\users\paul\documents\github\be_seronie\src\core_simulation.h
+=======
+1590245849 c:\users\paul\documents\github\be_seronie\src\core_simulation.h
+>>>>>>> f2561f3132a132c24a8246fa939055825705ee44
 	<iostream>
 	<string>
 	<thread>
@@ -18,106 +26,82 @@
 	<string.h>
 	"core_simulation.h"
 
+<<<<<<< HEAD
 1590247884 source:c:\users\paul\documents\github\be_seronie\src\core_simulation.cpp
+=======
+1590245996 source:c:\users\paul\documents\github\be_seronie\src\core_simulation.cpp
+>>>>>>> f2561f3132a132c24a8246fa939055825705ee44
 	<thread>
 	<unistd.h>
 	<string.h>
 	<windows.h>
 	"core_simulation.h"
 
+<<<<<<< HEAD
 1590247884 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
 	"mydevices.h"
 	<windows.h>
 
 1590247884 source:c:\users\paul\documents\github\be_seronie\src\sketch_ino.cpp
 	<unistd.h>
+=======
+1590245849 source:c:\users\paul\documents\github\be_seronie\src\sketch_ino.cpp
+	<unistd.h>
 	"core_simulation.h"
 	<windows.h>
 
-1589808669 ated upstream
+1590245849 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
+	"mydevices.h"
+	<windows.h>
 
-1589805142 shed changes
+1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
+>>>>>>> f2561f3132a132c24a8246fa939055825705ee44
+	"core_simulation.h"
+	"mydevices.h"
+	<windows.h>
+
+1590246845 c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.h
 	<iostream>
 	<string>
 	<thread>
 	<mutex>
 	<windows.h>
 
-1589808669 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\board.cpp
-	"core_simulation.h"
-	"mydevices.h"
-	<windows.h>
-
-1589810921 c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\core_simulation.h
-
-1589808669 c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\mydevices.h
+1590246845 c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.h
 	<iostream>
 	<thread>
 	<unistd.h>
 	<string.h>
 	"core_simulation.h"
 
-1589799550 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\core_simulation.cpp
-	"core_simulation.h"
-	"mydevices.h"
-	<windows.h>
+1590246845 ated upstream
 
-1589799550 >
-
-1589808669 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\mydevices.cpp
-	"mydevices.h"
-	<windows.h>
-
-1589799550 source:c:\users\paul\documents\github\be_seronie\src\be_seronie_geneau\sketch_ino.cpp
-	<unistd.h>
-	"core_simulation.h"
-	<windows.h>
-
-1589805142 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\be_seronie_geneau\core_simulation.cpp
+1590247713 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
 	<thread>
 	<unistd.h>
 	<string.h>
 	<windows.h>
 	"core_simulation.h"
 
-1589805142 c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\be_seronie_geneau\core_simulation.h
-	<iostream>
-	<string>
-	<thread>
-	<mutex>
-	<windows.h>
-
-1589967180 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
+1590246676 shed changes
 	<thread>
 	<unistd.h>
 	<string.h>
 	<windows.h>
 	"core_simulation.h"
-
-1589966849 c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.h
-	<iostream>
-	<string>
-	<thread>
-	<mutex>
 	<windows.h>
 
-1589966813 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
-	"core_simulation.h"
+1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
 	"mydevices.h"
 	<windows.h>
 
-1589966870 c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.h
-	<iostream>
-	<thread>
+1589967180 D
+
+1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
 	<unistd.h>
-	<string.h>
 	"core_simulation.h"
 
-1589967129 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
-	"mydevices.h"
-	<windows.h>
-
-1589967129 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
+1590243428 nch_Teo
 	<unistd.h>
 	"core_simulation.h"
 	<windows.h>
