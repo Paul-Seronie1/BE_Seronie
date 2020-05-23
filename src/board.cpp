@@ -24,7 +24,7 @@ int main(){
 
   ventilo.setSpeed(0, 110, 1.5);
 
-  TensionSensor voltmetre(3, DELAY);
+//  TensionSensor voltmetre(3, DELAY);
 
   Ventilator ventilo(0, DELAY);
 
@@ -35,13 +35,7 @@ int main(){
 
 
   // branchement des capteurs actionneurs
-<<<<<<< HEAD
 
-  esp8266.pin(2, voltmetre);
-
-=======
-  esp8266.pin(2, voltmetre);
->>>>>>> Branch_Teo
   esp8266.pin(1,temperature);
 
   esp8266.pin(0,led1);
@@ -56,11 +50,6 @@ int main(){
   // allumage de la carte
 
   esp8266.run();
-<<<<<<< HEAD
 
   return 0;
-
-=======
-  return 0;
->>>>>>> Branch_Teo
 }
