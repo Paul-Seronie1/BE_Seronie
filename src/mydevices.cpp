@@ -4,8 +4,11 @@
 
 #define sleep(x) Sleep(1000 * (x))
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> Branch_Teo
 using namespace std;
 
 
@@ -200,6 +203,87 @@ void Ventilator::run()
 
 }
 
+//class TensionSensor
+TensionSensor::TensionSensor(int v, int t):Device(),val(v), temps(t)
+{
+}
+
+void TensionSensor::run()
+{
+    while(1)
+    {
+        if (ptrmem!=NULL)
+        {
+            *ptrmem=val;
+        }
+        sleep(temps);
+    }
+}
+
+//class Ventilator
+Ventilator::Ventilator(bool m, int t):Device(),mode(m), temps(t)
+{
+    speed = 0;
+}
+
+int Ventilator::getSpeed()
+{
+    return speed;
+}
+
+void Ventilator::setSpeed(int s, int temp, float tension)
+{
+    if (mode) //mode manuel
+    {
+        speed = s;
+        if (speed > MAXVRPM)
+        {
+            speed = MAXVRPM;
+        }
+    }
+    else
+    {
+        if (temp < 50 && tension < 0.7)
+        {
+            speed = 0;
+        }
+        else
+        {
+            if (110*(temp-50) > (int)5392*(tension-0.7))
+            {
+                speed = 110*(temp-50);
+            }
+            else
+            {
+                speed = (int)5392*(tension-0.7);
+            }
+            if (speed > MAXVRPM)
+            {
+                speed = MAXVRPM;
+            }
+        }
+    }
+}
+
+void Ventilator::run()
+{
+    while(1)
+    {
+        if (ptrmem!=NULL)
+        {
+            *ptrmem = speed;
+        }
+        if (mode)
+        {
+           cout << "Mode manuel, speed = " << speed << endl;
+        }
+        else
+        {
+            cout << "Mode auto, speed = " << speed << endl;
+        }
+        sleep(temps);
+    }
+}
 //classe DigitalActuatorLED
 
 DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
@@ -250,6 +334,7 @@ void I2CActuatorScreen::run(){
 
       cout << "---screen :"<< buf << endl;
 
+<<<<<<< HEAD
     }
 
     sleep(1);
@@ -257,3 +342,5 @@ void I2CActuatorScreen::run(){
     }
 
 }
+=======
+>>>>>>> Branch_Teo
