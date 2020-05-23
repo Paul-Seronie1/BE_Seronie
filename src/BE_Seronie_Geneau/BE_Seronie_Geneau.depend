@@ -1,18 +1,29 @@
 # depslib dependency file v1.0
-<<<<<<< HEAD
-1590247884 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
-=======
-1590245849 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
->>>>>>> f2561f3132a132c24a8246fa939055825705ee44
+240 <<<<<<< HEAD
+
+1590248035 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
 
-<<<<<<< HEAD
+1590246845 61f3132a132c24a8246fa939055825705ee44
+	"core_simulation.h"
+	"mydevices.h"
+	<windows.h>
+	<iostream>
+	<string>
+	<thread>
+	<mutex>
+	<windows.h>
+	<thread>
+	<unistd.h>
+	<string.h>
+	<windows.h>
+	"core_simulation.h"
+
+1589967180 D
+
 1590246896 c:\users\paul\documents\github\be_seronie\src\core_simulation.h
-=======
-1590245849 c:\users\paul\documents\github\be_seronie\src\core_simulation.h
->>>>>>> f2561f3132a132c24a8246fa939055825705ee44
 	<iostream>
 	<string>
 	<thread>
@@ -26,40 +37,28 @@
 	<string.h>
 	"core_simulation.h"
 
-<<<<<<< HEAD
-1590247884 source:c:\users\paul\documents\github\be_seronie\src\core_simulation.cpp
-=======
-1590245996 source:c:\users\paul\documents\github\be_seronie\src\core_simulation.cpp
->>>>>>> f2561f3132a132c24a8246fa939055825705ee44
+1590248035 source:c:\users\paul\documents\github\be_seronie\src\core_simulation.cpp
 	<thread>
 	<unistd.h>
 	<string.h>
 	<windows.h>
 	"core_simulation.h"
 
-<<<<<<< HEAD
-1590247884 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
+1590248554 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
 	"mydevices.h"
 	<windows.h>
 
-1590247884 source:c:\users\paul\documents\github\be_seronie\src\sketch_ino.cpp
-	<unistd.h>
-=======
 1590245849 source:c:\users\paul\documents\github\be_seronie\src\sketch_ino.cpp
+	<unistd.h>
 	<unistd.h>
 	"core_simulation.h"
 	<windows.h>
 
-1590245849 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
-	"mydevices.h"
-	<windows.h>
+1590247884 
 
-<<<<<<< HEAD
-1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
->>>>>>> f2561f3132a132c24a8246fa939055825705ee44
-=======
 1590247954 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
->>>>>>> 3447d498d63d0dbcc728f59a3eebe26b72d0c2d9
+
+1590247954 7d498d63d0dbcc728f59a3eebe26b72d0c2d9
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
@@ -98,8 +97,6 @@
 1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
 	"mydevices.h"
 	<windows.h>
-
-1589967180 D
 
 1590247954 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
 	<unistd.h>
