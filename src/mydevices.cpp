@@ -4,11 +4,8 @@
 
 #define sleep(x) Sleep(1000 * (x))
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> Branch_Teo
 using namespace std;
 
 
@@ -334,7 +331,7 @@ void I2CActuatorScreen::run(){
 
       cout << "---screen :"<< buf << endl;
 
-<<<<<<< HEAD
+
     }
 
     sleep(1);
@@ -342,5 +339,4 @@ void I2CActuatorScreen::run(){
     }
 
 }
-=======
->>>>>>> Branch_Teo
+
