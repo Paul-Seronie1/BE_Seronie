@@ -347,5 +347,3 @@ void Board::i2c(int addr,Device& dev){
   tabthreadbus[addr]=new thread(&Device::run,&dev);
 
 }
-
-
