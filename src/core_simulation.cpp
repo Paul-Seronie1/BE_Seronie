@@ -688,12 +688,7 @@ void Board::i2c(int addr,Device& dev){
 
   dev.setI2CAddr(addr,&bus);
 
-<<<<<<< HEAD
-
 
   tabthreadbus[addr]=new thread(&Device::run,&dev);
 
-=======
-  tabthreadbus[addr]=new thread(&Device::run,&dev);
->>>>>>> Branch_Teo
 }
