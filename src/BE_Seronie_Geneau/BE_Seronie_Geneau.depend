@@ -53,23 +53,17 @@
 	<string.h>
 	"core_simulation.h"
 
-<<<<<<< Updated upstream
+1590246845 ated upstream
+
 1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
-=======
-1590246573 c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.h
-	<iostream>
-	<string>
->>>>>>> Stashed changes
+
+1590246676 shed changes
 	<thread>
 	<unistd.h>
 	<string.h>
 	<windows.h>
-<<<<<<< Updated upstream
-=======
-
-1590246676 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
->>>>>>> Stashed changes
 	"core_simulation.h"
+	<windows.h>
 
 1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
 	"mydevices.h"
@@ -80,13 +74,6 @@
 1590246845 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
 	<unistd.h>
 	"core_simulation.h"
-<<<<<<< Updated upstream
-=======
-
-1590246676 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
-	"mydevices.h"
->>>>>>> Stashed changes
-	<windows.h>
 
 1590243428 nch_Teo
 	<unistd.h>
