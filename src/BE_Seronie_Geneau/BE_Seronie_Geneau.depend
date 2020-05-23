@@ -34,7 +34,11 @@
 	"mydevices.h"
 	<windows.h>
 
+<<<<<<< Updated upstream
 1590244394 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
+=======
+1590246702 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
+>>>>>>> Stashed changes
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
@@ -60,6 +64,7 @@
 	<windows.h>
 	"core_simulation.h"
 
+<<<<<<< Updated upstream
 1590244394 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
 	"mydevices.h"
 	<windows.h>
@@ -68,6 +73,9 @@
 1590243336 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
 =======
 1589967180 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
+=======
+1590246702 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
+>>>>>>> Stashed changes
 	<thread>
 >>>>>>> Branch_Teo
 	<unistd.h>
@@ -75,12 +83,17 @@
 <<<<<<< HEAD
 =======
 
+<<<<<<< Updated upstream
 1590243428 c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.h
 	<iostream>
 	<string>
 	<thread>
 	<mutex>
 >>>>>>> Branch_Teo
+=======
+1590246702 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
+	"mydevices.h"
+>>>>>>> Stashed changes
 	<windows.h>
 
 1590243428 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\board.cpp
@@ -88,9 +101,13 @@
 	"mydevices.h"
 	<windows.h>
 
+<<<<<<< Updated upstream
 1590243336 c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.h
 	<iostream>
 	<thread>
+=======
+1590246702 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
+>>>>>>> Stashed changes
 	<unistd.h>
 	<string.h>
 	"core_simulation.h"
