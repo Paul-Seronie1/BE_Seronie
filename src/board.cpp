@@ -22,18 +22,15 @@ int main(){
 
   ventilo.setSpeed(0, 110, 1.5);
 
-
-
-
-
-
   // branchement des capteurs actionneurs
 
+
+  esp8266.pin(0,led1);
   esp8266.pin(2, voltmetre);
   esp8266.pin(1,temperature);
-  esp8266.pin(0,led1);
-  esp8266.i2c(1,screen);
   esp8266.pin(3, ventilo);
+  esp8266.i2c(1,screen);
+
 
 
 
