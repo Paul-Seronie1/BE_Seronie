@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1589967905 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
+1589969201 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
@@ -30,7 +30,7 @@
 	"core_simulation.h"
 	<windows.h>
 
-1589968151 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
+1590245472 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
 	"mydevices.h"
 	<windows.h>
 
