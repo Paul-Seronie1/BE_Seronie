@@ -21,44 +21,28 @@ void Board::setup(){
   pinMode(0,OUTPUT);
   pinMode(3, OUTPUT);
 
-
+}
 
 // la boucle de controle arduino
 
 void Board::loop(){
-
   char buf[100];
-
   int val;
-
   int volt;
-
   static int cpt=0;
-
   static int bascule=0;
-
   int i=0;
-
   for(i=0;i<10;i++){
-
     // lecture sur la pin 1 : capteur de temperature
-
     val=analogRead(1);
-
     sprintf(buf,"temperature %d",val);
-
     Serial.println(buf);
-
-    volt=analogRead(2);
-
-    sprintf(buf,"tension %d",volt);
-
-    Serial.println(buf);
-
     volt=analogRead(2);
     sprintf(buf,"tension %d",volt);
     Serial.println(buf);
-
+    volt=analogRead(2);
+    sprintf(buf,"tension %d",volt);
+    Serial.println(buf);
     if(cpt%5==0){
 
         // tous les 5 fois on affiche sur l ecran la temperature
@@ -77,15 +61,11 @@ void Board::loop(){
 
 // on eteint et on allume la LED
 
-  if(bascule)
-
+  if(bascule){
     digitalWrite(0,HIGH);
-
-  else
-
+  }
+  else{
     digitalWrite(0,LOW);
-
+  }
   bascule=1-bascule;
-
-
 }
