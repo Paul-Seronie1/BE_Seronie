@@ -90,7 +90,7 @@ void Ventilator::run()
         }
         if (mode)
         {
-            cout << "Mode manuel, speed = " << speed << endl;
+           cout << "Mode manuel, speed = " << speed << endl;
         }
         else
         {
