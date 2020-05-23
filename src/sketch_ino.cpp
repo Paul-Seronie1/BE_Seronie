@@ -12,11 +12,6 @@ void Board::setup(){
 // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
 
   pinMode(1,INPUT2);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 765e7525dfc7c78e2ba7d9062858d4890b25940b
   pinMode(2, INPUT2);
   pinMode(0,OUTPUT);
   pinMode(3, OUTPUT);
