@@ -19,6 +19,10 @@ int main(){
   DigitalActuatorLED led1(DELAY);
 
   I2CActuatorScreen screen;
+  TensionSensor voltmetre(3, DELAY);
+  Ventilator ventilo(0, DELAY);
+
+  ventilo.setSpeed(0, 110, 1.5);
 
   TensionSensor voltmetre(3, DELAY);
 
@@ -31,14 +35,19 @@ int main(){
 
 
   // branchement des capteurs actionneurs
+<<<<<<< HEAD
 
   esp8266.pin(2, voltmetre);
 
+=======
+  esp8266.pin(2, voltmetre);
+>>>>>>> Branch_Teo
   esp8266.pin(1,temperature);
 
   esp8266.pin(0,led1);
 
   esp8266.i2c(1,screen);
+  esp8266.pin(3, ventilo);
 
   esp8266.pin(3, ventilo);
 
@@ -47,7 +56,11 @@ int main(){
   // allumage de la carte
 
   esp8266.run();
+<<<<<<< HEAD
 
   return 0;
 
+=======
+  return 0;
+>>>>>>> Branch_Teo
 }
