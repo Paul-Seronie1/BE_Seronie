@@ -31,7 +31,7 @@ void Board::setup(){
   pinMode(3, OUTPUT);
 
 
-
+}
 // la boucle de controle arduino
 
 void Board::loop(){
