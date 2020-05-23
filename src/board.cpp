@@ -24,7 +24,7 @@ int main(){
 
   ventilo.setSpeed(0, 110, 1.5);
 
-//  TensionSensor voltmetre(3, DELAY);
+  TensionSensor voltmetre(3, DELAY);
 
   Ventilator ventilo(0, DELAY);
 
