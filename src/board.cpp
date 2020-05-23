@@ -1,7 +1,5 @@
 #include "core_simulation.h"
-
 #include "mydevices.h"
-
 #include <windows.h>
 
 
