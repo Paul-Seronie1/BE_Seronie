@@ -17,7 +17,7 @@ void Board::setup(){
 // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
 
   pinMode(1,INPUT2);
-<<<<<<< HEAD
+
 
   pinMode(2, INPUT2);
 
@@ -25,12 +25,10 @@ void Board::setup(){
 
   pinMode(3, OUTPUT);
 
-=======
+
   pinMode(2, INPUT2);
   pinMode(0,OUTPUT);
   pinMode(3, OUTPUT);
->>>>>>> Branch_Teo
-}
 
 
 
@@ -41,13 +39,10 @@ void Board::loop(){
   char buf[100];
 
   int val;
-<<<<<<< HEAD
+
 
   int volt;
 
-=======
-  int volt;
->>>>>>> Branch_Teo
   static int cpt=0;
 
   static int bascule=0;
@@ -69,13 +64,11 @@ void Board::loop(){
     sprintf(buf,"tension %d",volt);
 
     Serial.println(buf);
-<<<<<<< HEAD
 
-=======
     volt=analogRead(2);
     sprintf(buf,"tension %d",volt);
     Serial.println(buf);
->>>>>>> Branch_Teo
+
     if(cpt%5==0){
 
         // tous les 5 fois on affiche sur l ecran la temperature
@@ -104,9 +97,4 @@ void Board::loop(){
 
   bascule=1-bascule;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> Branch_Teo
 }
