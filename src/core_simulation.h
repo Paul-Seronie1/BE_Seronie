@@ -8,6 +8,7 @@
 #include <windows.h>
 #define DELAY 3
 #define TEMP 22
+//#define TEMPMAX 100
 #define HIGH 1
 #define LOW 0
 #define MAX_I2C_DEVICES 4
