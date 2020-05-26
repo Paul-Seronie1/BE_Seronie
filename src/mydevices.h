@@ -8,51 +8,6 @@
 #include "core_simulation.h"
 #define MAXVRPM 5500
 
-// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
-class AnalogSensorTemperature: public Device {
-private:
-  // fait osciller la valeur du cpateur de 1
-  int alea;
-  // valeur de temperature mesuree
-  int val;
-  // valeur de temperature intermédiaire
-  int m_tempInt;
-  int m_tempCold;
-  int m_freqSensor;
-  int m_SpeedVentilo;
-  double m_CoeffA;
-  double m_CoeffB;
-  // temps entre 2 prises de valeurs
-  int temps;
-
-  Composant *m_freq2; // On créer un pointeur vers la classe Composant
-  Ventilator *m_Vent2; // On créer un pointeur vers la classe Ventilator
-
-public:
-
-  //constructeur ne pas oublier d'initialiser la classe mere
-  AnalogSensorTemperature(int d,int  t);
-  ~AnalogSensorTemperature();
-  AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier);
-  // thread representant le capteur et permettant de fonctionner independamment de la board
-  virtual void run();
-};
-
-//Capteur de tension (ou plus communément Voltmètre)
-class TensionSensor: public Device {
-
-private:
-    //valeur de la tension mesurée
-    int val;
-    //temps entree deux prises de valeurs
-    int temps;
-
-public:
-    //constructeur
-    TensionSensor(int v, int t);
-    virtual void run();
-};
-
 class Ventilator: public Device {
 
 private:
@@ -79,9 +34,9 @@ private:
 
 public:
     Composant();
-    Composant(int m_freq);  // Faire virtual pure abstrait pour pas y toucher
-    virtual void benchmark(double m_freq)=0;  // Création de classe abstraite avec utilisation de méthode virtuelle pure afin d'interdire l'utilisation de la classe composant
-    virtual void randomUse(double m_freq)=0;
+    Composant(double f, int v);  // Faire virtual pure abstrait pour pas y toucher
+    virtual void benchmark(double m_freq);  // Création de classe abstraite avec utilisation de méthode virtuelle pure afin d'interdire l'utilisation de la classe composant
+    virtual void randomUse(double m_freq);
     virtual double getFreq() const;
     virtual double getTmax() const;
     virtual int PercentageUse(double m_freq); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
@@ -89,7 +44,60 @@ public:
 
 
 
-class CPU: public Composant {
+// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
+class AnalogSensorTemperature: public Device {
+private:
+    Composant *m_freq2; // On créer un pointeur vers la classe Composant
+  Ventilator *m_Vent2; // On créer un pointeur vers la classe Ventilator
+
+  // fait osciller la valeur du cpateur de 1
+  int alea;
+  // valeur de temperature mesuree
+  int val;
+  // valeur de temperature intermédiaire
+  int m_tempInt;
+  int m_tempCold;
+  int m_freqSensor;
+  int m_SpeedVentilo;
+  double m_CoeffA;
+  double m_CoeffB;
+  // temps entre 2 prises de valeurs
+  int temps;
+
+
+public:
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60a81b659d764f6576225af307de4d27c38c902f
+  //constructeur ne pas oublier d'initialiser la classe mere
+  AnalogSensorTemperature(int d,int  t,double frequence, int vie);
+  ~AnalogSensorTemperature();
+  AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier);
+  // thread representant le capteur et permettant de fonctionner independamment de la board
+  virtual void run(AnalogSensorTemperature &b);
+  virtual void TempCold(AnalogSensorTemperature &b);
+};
+
+//Capteur de tension (ou plus communément Voltmètre)
+class TensionSensor: public Device {
+
+private:
+    //valeur de la tension mesurée
+    int val;
+    //temps entree deux prises de valeurs
+    int temps;
+
+public:
+    //constructeur
+    TensionSensor(int v, int t);
+    virtual void run();
+};
+
+
+
+
+/*class CPU: public Composant {
 
 private:
     int m_nbrCoeur;  //Nombre de coeur du processeur
@@ -100,12 +108,12 @@ public:
     Composant();
     Composant(int m_freq);
 
-};
+};*/
 
 
 
 
-class GPU: public Composant {
+/*class GPU: public Composant {
 
 private:
     int m_memory;  //Mémoire de la carte graphique
@@ -118,7 +126,7 @@ public:
     void randomUse(int m_freq);
 };
 
-
+*/
 
 
 
