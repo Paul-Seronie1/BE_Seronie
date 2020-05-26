@@ -54,10 +54,13 @@ void AnalogSensorTemperature::run(){
 }
 
 void AnalogSensorTemperature::TempCold(){
+
+   while(1){
     m_tempCold=TEMP + (m_freq2->getTmax()-TEMP)*exp(-(this->calculCoeffA()+this->calculCoeffB()));
     if(ptrmem!=NULL)
       *ptrmem=m_tempCold;
     sleep(temps);
+  }
 }
 
 void AnalogSensorTemperature::GetTemp(){
