@@ -25,31 +25,30 @@ public:
 
 class Composant: public Device {
 
-private:
+protected:
     double m_freq;
     int m_cycleVie;
-    int tmax;
-    int m_Percentage;
-
+    int m_tmax;
+    int m_percentage;
+    int m_nbComposants;
 
 public:
     Composant();
     Composant(double f, int v);  // Faire virtual pure abstrait pour pas y toucher
-    virtual void benchmark(double m_freq);  // Création de classe abstraite avec utilisation de méthode virtuelle pure afin d'interdire l'utilisation de la classe composant
-    virtual void randomUse(double m_freq);
+    virtual ~Composant();
+    //virtual void benchmark(double m_freq);  // Création de classe abstraite avec utilisation de méthode virtuelle pure afin d'interdire l'utilisation de la classe composant
+    //virtual void randomUse(double m_freq);
     virtual double getFreq() const;
-    virtual double getTmax() const;
-    virtual int PercentageUse(double m_freq); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
+    virtual int getTmax() const;
+    virtual int percentageUse(); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
 };
-
 
 
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
 class AnalogSensorTemperature: public Device {
 private:
-    Composant *m_freq2; // On créer un pointeur vers la classe Composant
+  Composant *m_freq2; // On créer un pointeur vers la classe Composant
   Ventilator *m_Vent2; // On créer un pointeur vers la classe Ventilator
-
   // fait osciller la valeur du cpateur de 1
   int alea;
   // valeur de temperature mesuree
@@ -57,8 +56,8 @@ private:
   // valeur de temperature intermédiaire
   int m_tempInt;
   int m_tempCold;
-  int m_freqSensor;
-  int m_SpeedVentilo;
+  double m_freqSensorPer; //Pourcentage
+  double m_SpeedVentiloPer; //POurcentage de la vitesse des ventilos
   double m_CoeffA;
   double m_CoeffB;
   // temps entre 2 prises de valeurs
@@ -66,19 +65,29 @@ private:
 
 
 public:
-<<<<<<< HEAD
-=======
-
->>>>>>> 60a81b659d764f6576225af307de4d27c38c902f
   //constructeur ne pas oublier d'initialiser la classe mere
-  AnalogSensorTemperature(int d,int  t,double frequence, int vie);
-  ~AnalogSensorTemperature();
-  AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier);
+  AnalogSensorTemperature(int d, int t, double frequence, int vie);
+  virtual ~AnalogSensorTemperature();
+  //AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier);
+  double calculCoeffA();
+  double calculCoeffB();
   // thread representant le capteur et permettant de fonctionner independamment de la board
-  virtual void run(AnalogSensorTemperature &b);
-  virtual void TempCold(AnalogSensorTemperature &b);
+  virtual void run();
+  virtual void GetTemp();
+  virtual void TempCold();
 };
 
+class Ensemble: public Device {
+
+protected:
+    Composant m_processeur;
+    Ventilator m_ventilo;
+    AnalogSensorTemperature m_capteurTemp;
+public:
+    Ensemble(Composant processeur, Ventilator ventilo, AnalogSensorTemperature capteurTemp);
+    virtual ~Ensemble();
+
+};
 //Capteur de tension (ou plus communément Voltmètre)
 class TensionSensor: public Device {
 
