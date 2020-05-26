@@ -10,7 +10,7 @@
 
 class Ventilator: public Device {
 
-private:
+protected:
     int speed;
     bool mode; //0 auto vs 1 manual
     int temps;
@@ -18,8 +18,8 @@ private:
 public:
     Ventilator(bool m, int t);
     int getSpeed();
-    void setSpeed(int s, int temp, float tension);
-    virtual void run();
+    void setSpeedManuel(int s);
+    void setSpeedAuto(int temp, int tension);
 };
 
 
@@ -41,67 +41,72 @@ public:
     virtual double getFreq() const;
     virtual int getTmax() const;
     virtual int percentageUse(); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
+    virtual void setFreq(double freq);
+    virtual void setFreqRand();
 };
 
 
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
 class AnalogSensorTemperature: public Device {
-private:
-  Composant *m_freq2; // On créer un pointeur vers la classe Composant
-  Ventilator *m_Vent2; // On créer un pointeur vers la classe Ventilator
+protected:
   // fait osciller la valeur du cpateur de 1
   int alea;
   // valeur de temperature mesuree
   int val;
-  // valeur de temperature intermédiaire
-  int m_tempInt;
-  int m_tempCold;
-  double m_freqSensorPer; //Pourcentage
-  double m_SpeedVentiloPer; //POurcentage de la vitesse des ventilos
-  double m_CoeffA;
-  double m_CoeffB;
   // temps entre 2 prises de valeurs
   int temps;
 
-
 public:
   //constructeur ne pas oublier d'initialiser la classe mere
-  AnalogSensorTemperature(int d, int t, double frequence, int vie);
+  AnalogSensorTemperature(int d, int t);
   virtual ~AnalogSensorTemperature();
-  //AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier);
-  double calculCoeffA();
-  double calculCoeffB();
+  void setTempRand(int tempAmbiente);
   // thread representant le capteur et permettant de fonctionner independamment de la board
-  virtual void run();
-  virtual void GetTemp();
-  virtual void TempCold();
+};
+
+//Capteur de tension (ou plus communément Voltmètre)
+class TensionSensor: public Device {
+
+protected:
+    //valeur de la tension mesurée
+    unsigned short val;
+    //temps entree deux prises de valeurs
+    int temps;
+
+    Composant *m_processeur;
+
+public:
+    //constructeur
+    TensionSensor( int t);
+    double getTension();
+    void setTension(double freq);
+    void setProcesseur(Composant *processeur);
+
 };
 
 class Ensemble: public Device {
 
 protected:
-    Composant m_processeur;
-    Ventilator m_ventilo;
-    AnalogSensorTemperature m_capteurTemp;
+    Composant *m_processeur;
+    Ventilator *m_ventilo;
+    AnalogSensorTemperature *m_capteurTemp;
+    TensionSensor *m_capteurTension;
 public:
-    Ensemble(Composant processeur, Ventilator ventilo, AnalogSensorTemperature capteurTemp);
+    Ensemble(Composant *processeur, Ventilator *ventilo, AnalogSensorTemperature *capteurTemp, TensionSensor *capteurTension);
     virtual ~Ensemble();
+    Composant *getProcesseur();
+    Ventilator *getVentilo();
+    AnalogSensorTemperature *getCapteurTemp();
+    double calculCoeffA();
+    double calculCoeffB();
+    int getTemp();
+    int getColdTemp();
+    void initialisation();
+    void run();
 
 };
-//Capteur de tension (ou plus communément Voltmètre)
-class TensionSensor: public Device {
 
-private:
-    //valeur de la tension mesurée
-    int val;
-    //temps entree deux prises de valeurs
-    int temps;
 
-public:
-    //constructeur
-    TensionSensor(int v, int t);
-    virtual void run();
-};
 
 
 
