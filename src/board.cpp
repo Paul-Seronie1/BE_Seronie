@@ -36,7 +36,6 @@ int main(){
   esp8266.pin(0,led1);
   esp8266.i2c(1,screen);
   esp8266.pin(3, ventilo);
-  esp8266.pin(3, ventilo);
 
 
 
