@@ -4,7 +4,7 @@
 
 #include <windows.h>
 
-
+using namespace std;
 
 int main(){
 
@@ -14,8 +14,8 @@ int main(){
 
   // achat des senseurs et actionneurs
 
-  Composant CPU1;
   AnalogSensorTemperature temperature(DELAY,TEMP,4,1000);
+
 
   DigitalActuatorLED led1(DELAY);
 
@@ -23,9 +23,11 @@ int main(){
   TensionSensor voltmetre(3, DELAY);
   Ventilator ventilo(0, DELAY);
 
+  Composant CPU1(4, 1000);
   ventilo.setSpeed(0, 110, 1.5);
 
 
+  Ensemble systeme1(CPU1, ventilo, temperature);
 
 
 
