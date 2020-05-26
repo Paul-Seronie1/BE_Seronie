@@ -15,12 +15,23 @@ private:
   int alea;
   // valeur de temperature mesuree
   int val;
+  // valeur de temperature intermédiaire
+  int m_tempInt;
+  int m_tempCold;
+  int m_freqSensor;
+  int m_SpeedVentilo;
+  double m_CoeffA;
+  double m_CoeffB;
   // temps entre 2 prises de valeurs
   int temps;
 
-public:
+  Composant *m_freq2; // On créer un pointeur vers la classe Composant
+  Ventilator *m_Vent2; // On créer un pointeur vers la classe Ventilator
+
   //constructeur ne pas oublier d'initialiser la classe mere
   AnalogSensorTemperature(int d,int  t);
+  ~AnalogSensorTemperature();
+  AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier);
   // thread representant le capteur et permettant de fonctionner independamment de la board
   virtual void run();
 };
@@ -53,6 +64,62 @@ public:
     void setSpeed(int s, int temp, float tension);
     virtual void run();
 };
+
+
+class Composant: public Device {
+
+private:
+    double m_freq;
+    int m_cycleVie;
+    int tmax;
+    int m_Percentage;
+
+
+public:
+    Composant();
+    Composant(int m_freq);  // Faire virtual pure abstrait pour pas y toucher
+    virtual void benchmark(double m_freq)=0;  // Création de classe abstraite avec utilisation de méthode virtuelle pure afin d'interdire l'utilisation de la classe composant
+    virtual void randomUse(double m_freq)=0;
+    virtual double getFreq() const;
+    virtual double getTmax() const;
+    virtual int PercentageUse(double m_freq); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
+};
+
+
+
+class CPU: public Composant {
+
+private:
+    int m_nbrCoeur;  //Nombre de coeur du processeur
+    int m_nbrThread;  //Nombre de thread du processeur
+
+
+public:
+    Composant();
+    Composant(int m_freq);
+
+};
+
+
+
+
+class GPU: public Composant {
+
+private:
+    int m_memory;  //Mémoire de la carte graphique
+
+
+public:
+    Composant();
+    Composant(int m_freq);
+    void benchmark(int m_freq);
+    void randomUse(int m_freq);
+};
+
+
+
+
+
 
 // exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
 class DigitalActuatorLED: public Device {
