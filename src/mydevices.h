@@ -66,6 +66,10 @@ private:
 
 
 public:
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60a81b659d764f6576225af307de4d27c38c902f
   //constructeur ne pas oublier d'initialiser la classe mere
   AnalogSensorTemperature(int d,int  t,double frequence, int vie);
   ~AnalogSensorTemperature();
