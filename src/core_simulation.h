@@ -6,7 +6,7 @@
 #include <thread>
 #include <mutex>
 #include <windows.h>
-#define DELAY 3
+#define DELAY 2
 #define TEMP 22
 //#define TEMPMAX 100
 #define HIGH 1
@@ -121,7 +121,7 @@ public:
      // fonction arduino : lecture analogique sur une pin
     void analogWrite(int i, int l);
    // fonction arduino : ecriture analogique sur une pin
-    int analogRead(int i);
+    double analogRead(int i);
   // fonction arduino : initialisation de la carte arduino
   void setup();
     // fonction arduino : boucle de controle de la carte arduino
