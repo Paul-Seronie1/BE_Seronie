@@ -3,7 +3,7 @@
 
 240 <<<<<<< HEAD
 
-1590479401 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
+1590487301 source:c:\users\paul\documents\github\be_seronie\src\board.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<windows.h>
@@ -31,6 +31,12 @@
 	<windows.h>
 	"core_simulation.h"
 	<windows.h>
+	<thread>
+	<unistd.h>
+	<string.h>
+	<windows.h>
+	"core_simulation.h"
+	<windows.h>
 
 1590246845 ated upstream
 
@@ -49,7 +55,7 @@
 	<windows.h>
 	"core_simulation.h"
 
-1589967180 D
+1590251218 D
 
 1590479401 c:\users\paul\documents\github\be_seronie\src\core_simulation.h
 	<iostream>
@@ -58,7 +64,7 @@
 	<mutex>
 	<windows.h>
 
-1590480536 c:\users\paul\documents\github\be_seronie\src\mydevices.h
+1590487629 c:\users\paul\documents\github\be_seronie\src\mydevices.h
 	<iostream>
 	<thread>
 	<unistd.h>
@@ -72,11 +78,10 @@
 	<windows.h>
 	"core_simulation.h"
 
-1590245143 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
+1590487550 source:c:\users\paul\documents\github\be_seronie\src\mydevices.cpp
 	"mydevices.h"
 	<windows.h>
-	"mydevices.h"
-	<windows.h>
+	<cmath>
 
 1590479814 source:c:\users\paul\documents\github\be_seronie\src\sketch_ino.cpp
 	<unistd.h>
@@ -109,35 +114,19 @@
 	<string.h>
 	"core_simulation.h"
 
-<<<<<<< HEAD
-1590246845 ated upstream
-
-1590467909 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
-=======
 1590251218 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\core_simulation.cpp
->>>>>>> 60a81b659d764f6576225af307de4d27c38c902f
+
+1590251218 81b659d764f6576225af307de4d27c38c902f
 	<thread>
 	<unistd.h>
 	<string.h>
 	<windows.h>
 	"core_simulation.h"
-
-<<<<<<< HEAD
-1590246676 shed changes
-	<thread>
-	<unistd.h>
-	<string.h>
-	<windows.h>
-	"core_simulation.h"
-	<windows.h>
-
-1590467909 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
-=======
-1590251218 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
->>>>>>> 60a81b659d764f6576225af307de4d27c38c902f
 	"mydevices.h"
 	<windows.h>
 	<cmath>
+
+1590251218 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\mydevices.cpp
 
 1590467909 source:c:\users\teo_l\onedrive\bureau\insa\be psfo\github psfo\be_seronie\src\sketch_ino.cpp
 	<unistd.h>
