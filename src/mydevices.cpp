@@ -14,10 +14,10 @@ using namespace std;
 
 //classe AnalogSensorTemperature
 
-AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Device(),val(t),temps(d),tempInt(0),m_freq2(0){
+AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t,double frequence, int vie):Device(),val(t),temps(d),m_tempInt(0),m_freq2(0){
 
   alea=1;
-  m_freq2 = new Composant(frequence); // appel du constructeur surchargé de Composant
+  m_freq2 = new Composant(frequence, vie); // appel du constructeur surchargé de Composant
 
 
 }
@@ -28,19 +28,19 @@ AnalogSensorTemperature::~AnalogSensorTemperature()
 }
 
 
-AnalogSensorTemperature:: AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier):Device(),val(t),temps(d),tempInt(0),m_freq2(0){
+/*AnalogSensorTemperature:: AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier,):Device(),val(VentiloACopier.val),temps(VentiloACopier.temps),tempInt(VentiloACopier.tempInt),m_freq2(0){
 
   alea=1;
   m_freq2 = new Composant(*(VentiloACopier.m_freq2)); // appel du constructeur surchargé de Composant
 
 
 }
+*/
 
 
 
 
-
-void AnalogSensorTemperature::run(AnalogSensorTemperature const& b){
+void AnalogSensorTemperature::run(AnalogSensorTemperature &b){
 
   while(1){
 
@@ -58,9 +58,9 @@ void AnalogSensorTemperature::run(AnalogSensorTemperature const& b){
 
 }
 
-void AnalogSensorTemperature::TempCold(AnalogSensorTemperature const& b){
+void AnalogSensorTemperature::TempCold(AnalogSensorTemperature &b){
     b->GetTemp();
-    m_tempCold=m_tempInt+exp(-b.CalculCoeffA()-b.CalculCoeffB());
+    m_tempCold=m_tempInt+exp(-b->CalculCoeffA()-b.CalculCoeffB());
     if(ptrmem!=NULL)
 
       *ptrmem=m_tempCold;
@@ -210,7 +210,7 @@ Composant::Composant() :Device(), m_freq(2,6), m_cycleVie(1000),tmax(100),m_Perc
 
 }
 
-Composant::Composant(int F, int Vie;) :Device(), m_freq(F), m_cycleVie(V),tmax(100),m_Percentage(50)  //Constructeur surchargé de la classe composant, pas besoin de destructeur si on travaille sans pointeur
+Composant::Composant(double f, int v;) :Device(), m_freq(f), m_cycleVie(v)  //Constructeur surchargé de la classe composant, pas besoin de destructeur si on travaille sans pointeur
 {
 
 }
