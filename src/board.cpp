@@ -24,7 +24,7 @@ int main(){
 
   ventilo.setSpeed(0, 110, 1.5);
 
-
+  Composant CPU1;
 
 
 
