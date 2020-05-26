@@ -14,7 +14,8 @@ int main(){
 
   // achat des senseurs et actionneurs
 
-  AnalogSensorTemperature temperature(DELAY,TEMP);
+  Composant CPU1;
+  AnalogSensorTemperature temperature(DELAY,TEMP,4,1000);
 
   DigitalActuatorLED led1(DELAY);
 
@@ -24,7 +25,7 @@ int main(){
 
   ventilo.setSpeed(0, 110, 1.5);
 
-  Composant CPU1;
+
 
 
 
