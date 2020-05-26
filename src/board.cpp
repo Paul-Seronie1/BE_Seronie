@@ -6,6 +6,11 @@
 
 using namespace std;
 
+double frand_a_b(double a, double b){
+
+    return ( rand()/(double)RAND_MAX ) * (b-a) + a;
+}
+
 int main(){
 
   // creation d'une board
@@ -14,22 +19,20 @@ int main(){
 
   // achat des senseurs et actionneurs
 
-  AnalogSensorTemperature temperature(DELAY,TEMP,4,1000);
 
 
   DigitalActuatorLED led1(DELAY);
 
   I2CActuatorScreen screen;
-  TensionSensor voltmetre(3, DELAY);
+
+  TensionSensor voltmetre(DELAY);
   Ventilator ventilo(0, DELAY);
-
   Composant CPU1(4, 1000);
-  ventilo.setSpeed(0, 110, 1.5);
+  voltmetre.setProcesseur(&CPU1);
+  AnalogSensorTemperature temperature(DELAY,TEMP);
 
-
-  Ensemble systeme1(CPU1, ventilo, temperature);
-
-
+  Ensemble systeme1(&CPU1, &ventilo, &temperature, &voltmetre);
+  systeme1.initialisation();
 
 
   // branchement des capteurs actionneurs
@@ -39,7 +42,7 @@ int main(){
   esp8266.pin(0,led1);
   esp8266.i2c(1,screen);
   esp8266.pin(3, ventilo);
-  //esp8266.pin(4, CPU1);
+  esp8266.pin(4, CPU1);
 
 
 
