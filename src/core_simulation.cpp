@@ -99,7 +99,7 @@ Device::Device(){
 
 void Device::run(){
   while(1){
-    cout << "empty device\n";
+    //cout << "empty device\n";
     sleep(3);
   }
 }
@@ -157,10 +157,10 @@ void Board::analogWrite(int i, int l){
     throw BoardException(INOUT);
 }
 
-int Board::analogRead(int i){
-  int   result=0;
+double Board::analogRead(int i){
+  double result=0;
   if (stateio[i]==INPUT2)
-    result= io[i];
+    result = io[i];
   else
     throw BoardException(INOUT);
   return result;
