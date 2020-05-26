@@ -120,7 +120,7 @@ public:
      // fonction arduino : lecture analogique sur une pin
     void analogWrite(int i, int l);
    // fonction arduino : ecriture analogique sur une pin
-    int analogRead(int i);
+    double analogRead(int i);
   // fonction arduino : initialisation de la carte arduino
   void setup();
     // fonction arduino : boucle de controle de la carte arduino
