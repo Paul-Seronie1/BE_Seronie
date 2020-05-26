@@ -28,6 +28,8 @@ private:
   Composant *m_freq2; // On créer un pointeur vers la classe Composant
   Ventilator *m_Vent2; // On créer un pointeur vers la classe Ventilator
 
+public:
+
   //constructeur ne pas oublier d'initialiser la classe mere
   AnalogSensorTemperature(int d,int  t);
   ~AnalogSensorTemperature();
