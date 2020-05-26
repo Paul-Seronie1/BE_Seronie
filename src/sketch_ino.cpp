@@ -20,6 +20,7 @@ void Board::setup(){
   pinMode(2, INPUT2);
   pinMode(0,OUTPUT);
   pinMode(3, OUTPUT);
+  pinMode(4, INPUT2);
 
 
 }
@@ -31,8 +32,9 @@ void Board::loop(){
 
   int val;
 
+  double volt;
 
-  int volt;
+  double freq;
 
   static int cpt=0;
 
@@ -40,20 +42,20 @@ void Board::loop(){
 
   int i=0;
 
+
   for(i=0;i<10;i++){
 
     // lecture sur la pin 1 : capteur de temperature
-
     val=analogRead(1);
-
     sprintf(buf,"temperature %d",val);
-
     Serial.println(buf);
 
-    volt=analogRead(2);
+    volt=digitalRead(2)/(double)38102;
+    sprintf(buf,"tension %f",volt);
+    Serial.println(buf);
 
-    sprintf(buf,"tension %d",volt);
-
+    freq=digitalRead(4)/(double)13107;
+    sprintf(buf,"Frequence %f",freq);
     Serial.println(buf);
 
     if(cpt%5==0){
@@ -68,7 +70,7 @@ void Board::loop(){
 
     cpt++;
 
-    sleep(1);
+    sleep(2);
 
   }
 
@@ -83,5 +85,4 @@ void Board::loop(){
     digitalWrite(0,LOW);
 
   bascule=1-bascule;
-
 }
