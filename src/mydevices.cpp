@@ -1,5 +1,5 @@
 #include "mydevices.h"
-
+#include "core_simulation.h"
 #include <windows.h>
 
 #include <cmath> // pour les calculs avec exponentionnel
@@ -12,113 +12,63 @@ using namespace std;
 
 //classe AnalogSensorTemperature
 
-AnalogSensorTemperature::AnalogSensorTemperature(int d, int t,double frequence, int vie):Device(),val(t),temps(d),m_tempInt(0),m_freq2(0){
+AnalogSensorTemperature::AnalogSensorTemperature(int d, int t):Device(),val(t),temps(d){
 
   alea=1;
-  m_freq2 = new Composant(frequence, vie); // appel du constructeur surchargé de Composant
-
-
 }
 
 AnalogSensorTemperature::~AnalogSensorTemperature()
 {
-    delete m_freq2;
 }
 
-
-/*AnalogSensorTemperature:: AnalogSensorTemperature(AnalogSensorTemperature const& VentiloACopier,):Device(),val(VentiloACopier.val),temps(VentiloACopier.temps),tempInt(VentiloACopier.tempInt),m_freq2(0){
-
-  alea=1;
-  m_freq2 = new Composant(*(VentiloACopier.m_freq2)); // appel du constructeur surchargé de Composant
-
-
+void AnalogSensorTemperature::setTempRand(int tempAmbiente){
+    int a = tempAmbiente+2;
+    int b = tempAmbiente-2;
+    srand(time(NULL)*577);
+    val = (int)(rand()/(double)RAND_MAX * (b-a) + a);
 }
-*/
 
-
-
-
-void AnalogSensorTemperature::run(){
-
+/*void AnalogSensorTemperature::run(){
   while(1){
-
-    // alea=1-alea;
-
-    this->GetTemp();
-    val=m_tempInt;
+    this->setTempRand(25);
     if(ptrmem!=NULL)
       *ptrmem=val;
     sleep(temps);
-
   }
-}
-
-void AnalogSensorTemperature::TempCold(){
-
-   while(1){
-    m_tempCold=TEMP + (m_freq2->getTmax()-TEMP)*exp(-(this->calculCoeffA()+this->calculCoeffB()));
-    if(ptrmem!=NULL)
-      *ptrmem=m_tempCold;
-    sleep(temps);
-  }
-}
-
-void AnalogSensorTemperature::GetTemp(){
-    m_tempInt=TEMP+(m_freq2->getTmax()-TEMP)*m_freq2->percentageUse();
-}
-
-
-double AnalogSensorTemperature::calculCoeffA(){
-
-     m_freqSensorPer=m_freq2->percentageUse();
-     if (m_freqSensorPer>=10)
-    {
-        m_CoeffA=-1+(m_freqSensorPer-10)*0.0111111111111;
-    }                                                       // avec a pourcentage d'utilisation du proc entre 1(10%) et 0 (100%)
-    else{
-        m_CoeffA=10-m_freqSensorPer;
-    }
-}
-
-
-
-double AnalogSensorTemperature::calculCoeffB(){
-
-
-     m_SpeedVentiloPer=(double)m_Vent2->getSpeed()/5500;
-     if (m_freq2->percentageUse()>=10)
-    {
-        m_CoeffB=m_SpeedVentiloPer/10;
-    }  //   b pourcentage utilisaition des ventilateur entre 0(0%) et 0,1 (100%), Passer b de 0 à 0,2 si Tmax=115 pour descendre sous 100°C
-    else
-    {
-        m_CoeffB=0;
-    }
-}
-
-
-
-
-
-
+}*/
 
 
 //class TensionSensor
-TensionSensor::TensionSensor(int v, int t):Device(),val(v), temps(t)
+TensionSensor::TensionSensor(int t):Device(),val(0), temps(t)
 {
+    m_processeur = new Composant(2.5, 1);
 }
 
-void TensionSensor::run()
+double TensionSensor::getTension(){
+
+    return val;
+}
+
+void TensionSensor::setProcesseur(Composant *processeur){
+    m_processeur = processeur;
+}
+
+void TensionSensor::setTension(double freq){
+    val = freq*0.344*38102; //en mV
+
+}
+/*void TensionSensor::run()
 {
     while(1)
     {
+        setTension(m_processeur->getFreq());
         if (ptrmem!=NULL)
         {
             *ptrmem=val;
         }
         sleep(temps);
     }
-}
+}*/
 
 //class Ventilator
 Ventilator::Ventilator(bool m, int t):Device(),mode(m), temps(t)
@@ -131,41 +81,38 @@ int Ventilator::getSpeed()
     return speed;
 }
 
-void Ventilator::setSpeed(int s, int temp, float tension)
+void Ventilator::setSpeedManuel(int s)
 {
-    if (mode) //mode manuel
-    {
         speed = s;
         if (speed > MAXVRPM)
         {
             speed = MAXVRPM;
         }
+}
+
+void Ventilator::setSpeedAuto(int temp, int tension){
+    if (temp < 50 && tension < 0.7)
+    {
+        speed = 0;
     }
     else
     {
-        if (temp < 50 && tension < 0.7)
+        if (110*(temp-50) > (int)5392*(tension-0.7))
         {
-            speed = 0;
+            speed = 110*(temp-50);
         }
         else
         {
-            if (110*(temp-50) > (int)5392*(tension-0.7))
-            {
-                speed = 110*(temp-50);
-            }
-            else
-            {
-                speed = (int)5392*(tension-0.7);
-            }
-            if (speed > MAXVRPM)
-            {
-                speed = MAXVRPM;
-            }
+            speed = (int)5392*(tension-0.7);
+        }
+        if (speed > MAXVRPM)
+        {
+            speed = MAXVRPM;
         }
     }
 }
 
-void Ventilator::run()
+/*void Ventilator::run()
 {
     while(1)
     {
@@ -183,7 +130,7 @@ void Ventilator::run()
         }
         sleep(temps);
     }
-}
+}*/
 
 
 //classe Composant
@@ -202,7 +149,7 @@ Composant::~Composant(){m_nbComposants--;}
 
 double Composant::getFreq() const
 {
-    return m_freq;
+    return m_freq/(double)13107;
 }
 
 int Composant::getTmax() const
@@ -217,17 +164,110 @@ int Composant::percentageUse()
     return m_percentage;
 }
 
+void Composant::setFreq(double freq){
+    m_freq = freq;
+}
 
+void Composant::setFreqRand(){
+    int a = 0;
+    int b = 5;
+    srand(time(NULL)*577);
+    m_freq = 13107*((rand()/(double)RAND_MAX)*(b-a) + a); //En MHz
+}
+
+/*void Composant::run(){
+    sleep(1);
+    while (1){
+        this->setFreqRand();
+        if (ptrmem!=NULL)
+        {
+            *ptrmem = m_freq;
+        }
+    sleep(2);
+    }
+}*/
 
 //Classe Ensemble
 
-Ensemble::Ensemble(Composant processeur, Ventilator ventilo, AnalogSensorTemperature capteurTemp):Device(),m_processeur(processeur),m_ventilo(ventilo), m_capteurTemp(capteurTemp)
+Ensemble::Ensemble(Composant *processeur, Ventilator *ventilo, AnalogSensorTemperature *capteurTemp, TensionSensor *capteurTension):Device(),
+m_processeur(processeur),m_ventilo(ventilo),
+m_capteurTemp(capteurTemp), m_capteurTension(capteurTension)
 {
 
 }
 
 Ensemble::~Ensemble(){}
 
+Composant *Ensemble::getProcesseur(){
+    return m_processeur;
+}
+Ventilator *Ensemble::getVentilo(){
+    return m_ventilo;
+}
+AnalogSensorTemperature *Ensemble::getCapteurTemp(){
+    return m_capteurTemp;
+}
+double Ensemble::calculCoeffA(){
+    double resultat;
+     if (m_processeur->percentageUse()>=10)
+    {
+        resultat=-1+(m_processeur->percentageUse()-10)*0.0111111111111;
+    }                                                       // avec a pourcentage d'utilisation du proc entre 1(10%) et 0 (100%)
+    else{
+        resultat=10-m_processeur->percentageUse();
+    }
+    return resultat;
+}
+
+
+double Ensemble::calculCoeffB(){
+     double resultat;
+     if (m_processeur->percentageUse()>=10)
+    {
+        resultat=(double)(m_ventilo->getSpeed()/(double)5500)/10;
+    }  //   b pourcentage utilisaition des ventilateur entre 0(0%) et 0,1 (100%), Passer b de 0 à 0,2 si Tmax=115 pour descendre sous 100°C
+    else
+    {
+        resultat=0;
+    }
+    return resultat;
+}
+
+int Ensemble::getTemp(){
+    return TEMP+(m_processeur->getTmax()-TEMP)*m_processeur->percentageUse();
+}
+int Ensemble::getColdTemp(){
+    return TEMP + (m_processeur->getTmax()-TEMP)*exp(-(this->calculCoeffA()+this->calculCoeffB()));
+}
+void Ensemble::initialisation(){
+    m_processeur->setFreqRand();
+    m_capteurTension->setTension(m_processeur->getFreq());
+    m_ventilo->setSpeedAuto(this->getTemp(), m_capteurTension->getTension());
+}
+
+void Ensemble::run(){
+    while (1){
+
+        m_processeur->setFreqRand();
+        m_capteurTension->setTension(m_processeur->getFreq());
+        m_ventilo->setSpeedAuto(this->getTemp(), m_capteurTension->getTension());
+        m_capteurTemp->setTempRand(25);
+        if (m_processeur->ptrmem!=NULL){
+            m_processeur->*ptrmem = m_processeur->getFreq();
+        }
+        if (m_capteurTension->ptrmem!=NULL){
+            m_capteurTension->*ptrmem = m_capteurTension->getTension();
+        }
+        if (m_ventilo->ptrmem!=NULL){
+            m_ventilo->*ptrmem = m_ventilo->getSpeed();
+        }
+        if (m_capteurTemp->ptrmem!=NULL){
+            m_capteurTemp->*ptrmem = m_capteurTemp->getTemp();
+        }
+
+        sleep(2);
+    }
+}
 
 //Actuateur
 
