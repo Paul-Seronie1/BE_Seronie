@@ -14,7 +14,7 @@ int main(){
 
   AnalogSensorTemperature temperature(DELAY,TEMP);
 
-  DigitalActuatorLED led1(DELAY);
+  DigitalActuatorLED led1(2*DELAY);
 
   I2CActuatorScreen screen;
   TensionSensor voltmetre(3, DELAY);
