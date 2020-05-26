@@ -7,14 +7,12 @@
 #define sleep(x) Sleep(1000 * (x))
 
 
-
 using namespace std;
-
 
 
 //classe AnalogSensorTemperature
 
-AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t,double frequence, int vie):Device(),val(t),temps(d),m_tempInt(0),m_freq2(0){
+AnalogSensorTemperature::AnalogSensorTemperature(int d, int t,double frequence, int vie):Device(),val(t),temps(d),m_tempInt(0),m_freq2(0){
 
   alea=1;
   m_freq2 = new Composant(frequence, vie); // appel du constructeur surchargé de Composant
@@ -40,79 +38,61 @@ AnalogSensorTemperature::~AnalogSensorTemperature()
 
 
 
-void AnalogSensorTemperature::run(AnalogSensorTemperature &b){
+void AnalogSensorTemperature::run(){
 
   while(1){
 
     // alea=1-alea;
 
-    b->GetTemp();
+    this->GetTemp();
     val=m_tempInt;
     if(ptrmem!=NULL)
-
       *ptrmem=val;
-
     sleep(temps);
 
   }
-
 }
 
-void AnalogSensorTemperature::TempCold(AnalogSensorTemperature &b){
-    b->GetTemp();
-    m_tempCold=m_tempInt+exp(-b->CalculCoeffA()-b.CalculCoeffB());
+void AnalogSensorTemperature::TempCold(){
+    m_tempCold=TEMP + (m_freq2->getTmax()-TEMP)*exp(-(this->calculCoeffA()+this->calculCoeffB()));
     if(ptrmem!=NULL)
-
       *ptrmem=m_tempCold;
-
     sleep(temps);
 }
 
-
-
-
 void AnalogSensorTemperature::GetTemp(){
-
-m_tempInt=TEMP+(m_freq2.getTmax()-TEMP)*m_freq2.PercentageUse();
-return m_tempInt;
+    m_tempInt=TEMP+(m_freq2->getTmax()-TEMP)*m_freq2->percentageUse();
 }
 
 
-double AnalogSensorTemperature::CalculCoeffA(){
+double AnalogSensorTemperature::calculCoeffA(){
 
-
-     m_freqSensor=m_freq2.PercentageUse();
-     if (m_freqSensor>=10)
-        {
-            m_CoeffA=-1+(m_freqSensor-10)x0,0111111111111;    // avec a pourcentage d'utilisation du proc entre 1(10%) et 0 (100%)
-            else                                              // et entre 10(0%) et 1(10%) avec Temp proc= 25 à 50°C entre 0 et 10% pas besoin de ventilo
-                                                              // = utilisation normale ventilo quasi au repos
-            {
-               m_CoeffA=10-m_freqSensor;
-            }
-
-        }
-
+     m_freqSensorPer=m_freq2->percentageUse();
+     if (m_freqSensorPer>=10)
+    {
+        m_CoeffA=-1+(m_freqSensorPer-10)*0.0111111111111;
+    }                                                       // avec a pourcentage d'utilisation du proc entre 1(10%) et 0 (100%)
+    else{
+        m_CoeffA=10-m_freqSensorPer;
+    }
 }
 
 
-double AnalogSensorTemperature::CalculCoeffB(){
+
+double AnalogSensorTemperature::calculCoeffB(){
 
 
-     m_SpeedVentilo=m_Vent2.getSpeed();
-     m_SpeedVentilo=m_SpeedVentilo/5500;
-     if (m_freq2.PercentageUse()>=10)
-        {
-            m_CoeffB=m_SpeedVentilo/10;    //   b pourcentage utilisaition des ventilateur entre 0(0%) et 0,1 (100%), Passer b de 0 à 0,2 si Tmax=115 pour descendre sous 100°C
-            else
-            {
-               m_CoeffB=0;
-            }
-
-        }
-
-
+     m_SpeedVentiloPer=(double)m_Vent2->getSpeed()/5500;
+     if (m_freq2->percentageUse()>=10)
+    {
+        m_CoeffB=m_SpeedVentiloPer/10;
+    }  //   b pourcentage utilisaition des ventilateur entre 0(0%) et 0,1 (100%), Passer b de 0 à 0,2 si Tmax=115 pour descendre sous 100°C
+    else
+    {
+        m_CoeffB=0;
+    }
 }
+
 
 
 
@@ -205,39 +185,45 @@ void Ventilator::run()
 
 //classe Composant
 
-Composant::Composant() :Device(), m_freq(2,6), m_cycleVie(1000),tmax(100),m_Percentage(50)     //Constructeur par défaut de la classe composant
+Composant::Composant() :Device(), m_freq(2.6), m_cycleVie(1000),m_tmax(100),m_percentage(50)     //Constructeur par défaut de la classe composant
 {
-
+    m_nbComposants++;
 }
 
-Composant::Composant(double f, int v;) :Device(), m_freq(f), m_cycleVie(v)  //Constructeur surchargé de la classe composant, pas besoin de destructeur si on travaille sans pointeur
+Composant::Composant(double f, int v) :Device(), m_freq(f), m_cycleVie(v), m_tmax(100), m_percentage(50)  //Constructeur surchargé de la classe composant, pas besoin de destructeur si on travaille sans pointeur
 {
-
+    m_nbComposants++;
 }
 
-
+Composant::~Composant(){m_nbComposants--;}
 
 double Composant::getFreq() const
 {
     return m_freq;
 }
 
-double Composant::getTmax() const
+int Composant::getTmax() const
 {
     return m_tmax;
 }
 
 
-
-int Composant::PercentageUse(int m_freq) const
+int Composant::percentageUse()
 {
-
     m_percentage=m_freq*20;
     return m_percentage;
 }
 
 
 
+//Classe Ensemble
+
+Ensemble::Ensemble(Composant processeur, Ventilator ventilo, AnalogSensorTemperature capteurTemp):Device(),m_processeur(processeur),m_ventilo(ventilo), m_capteurTemp(capteurTemp)
+{
+
+}
+
+Ensemble::~Ensemble(){}
 
 
 //Actuateur
