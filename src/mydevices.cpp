@@ -274,6 +274,28 @@ void Ensemble::run(){
 
 }
 
+
+
+
+// class ComposantException
+int ComposantException::get(){return num;}
+string ComposantException::text(){
+  string s;
+  switch(num){
+  case TEMPCRITIQUE : s=string("Temperature superieur a 90 degres, temperature critique, on reduit la duree de vie du processeur");break;
+  case TEMPDESTRUCTION : s=string("Temperature superieur a 100 degres, risque de destruction du processeur"); break;
+  default: s=string("erreur inconnue");
+  }
+  return s;
+}
+
+
+
+
+
+
+
+
 //Actuateur
 
 
