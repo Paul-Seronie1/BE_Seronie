@@ -7,7 +7,7 @@
 #include <mutex>
 #include <windows.h>
 #define DELAY 2
-#define TEMP 22
+#define TEMP 25
 //#define TEMPMAX 100
 #define HIGH 1
 #define LOW 0
