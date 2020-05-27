@@ -20,14 +20,50 @@ protected:
 
 public:
     Composant();
-    Composant(double f, int v);  // Faire virtual pure abstrait pour pas y toucher
-    virtual ~Composant();
-    virtual double getFreq() const;
-    virtual int getTmax() const;
-    virtual int percentageUse(); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
+    virtual ~Composant()=0;
+    virtual double getFreq()=0;
+    virtual int getTmax()=0;
+    virtual int percentageUse()=0; // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
+    virtual void setFreq(double freq)=0;
+    virtual void setFreqRand()=0;
+    virtual void run()=0;
+};
+
+class CPU: public Composant {
+private:
+    int m_nbCoeurs;  //Nombre de coeur du processeur
+    int m_nbThreads;  //Nombre de thread du processeur
+public:
+    CPU();
+    CPU(double frequence);
+    CPU(int coeurs, int threads);
+    virtual ~CPU(){};
+    virtual double getFreq();
+    virtual int getTmax();
+    virtual int percentageUse(); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation (0 à 100)
     virtual void setFreq(double freq);
     virtual void setFreqRand();
     virtual void run();
+};
+
+
+class GPU: public Composant {
+private:
+    int m_memory;  //Mémoire de la carte graphique
+public:
+    GPU();
+    GPU(double frequence);
+    GPU(int memory);
+    virtual ~GPU(){};
+    virtual double getFreq();
+    virtual int getTmax();
+    virtual int percentageUse(); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation (0 à 100)
+    virtual void setFreq(double freq);
+    virtual void setFreqRand();
+    virtual void run();
+
+    //void benchmark(int m_freq);
+    //void randomUse(int m_freq);
 };
 
 //Capteur de tension (ou plus communément Voltmètre)
@@ -39,17 +75,18 @@ protected:
     //temps entree deux prises de valeurs
     int temps;
 
-    Composant *m_processeur;
+    CPU *m_processeur;
 
 public:
     //constructeur
-    TensionSensor( int t);
+    TensionSensor(int t);
     double getTension();
     void setTension(double freq);
-    void setProcesseur(Composant *processeur);
+    void setProcesseur(CPU *processeur);
     virtual void run();
 
 };
+
 //Classe ventilateur
 class Ventilator: public Device {
 
@@ -60,19 +97,17 @@ protected:
 
 public:
     //Autres Device liés au ventilateur pour le réguler
-    Composant *processeur;
+    CPU *processeur;
     TensionSensor *capteur;
     Ventilator(bool m, int t);
     int getSpeed();
-    void setProcesseur(Composant *proces);
+    void setProcesseur(CPU *proces);
     void setCapteur(TensionSensor *capt);
     //diférents modes d'utilisation du ventiateur (manuel/auto)
     void setSpeedManuel(int s);
     void setSpeedAuto(int temp, double tension);
     virtual void run();
 };
-
-
 
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
 class AnalogSensorTemperature: public Device {
@@ -94,21 +129,20 @@ public:
   // thread representant le capteur et permettant de fonctionner independamment de la board
 };
 
-
 // Classe permettant de mettre en lien plusieurs device et de simuler le somportement du processeur régulé
 class Ensemble: public Device {
 
 protected:
     //Différents Device le composant
-    Composant *m_processeur;
+    CPU *m_processeur;
     Ventilator *m_ventilo;
     AnalogSensorTemperature *m_capteurTemp;
     TensionSensor *m_capteurTension;
 public:
-    Ensemble(Composant *processeur, Ventilator *ventilo, AnalogSensorTemperature *capteurTemp, TensionSensor *capteurTension);
+    Ensemble(CPU *processeur, Ventilator *ventilo, AnalogSensorTemperature *capteurTemp, TensionSensor *capteurTension);
     virtual ~Ensemble();
     //Différents assesseurs
-    Composant *getProcesseur();
+    CPU *getProcesseur();
     Ventilator *getVentilo();
     AnalogSensorTemperature *getCapteurTemp();
     //Partue modélisation mathématiques
@@ -119,8 +153,6 @@ public:
     virtual void run();
 
 };
-
-
 
 // exceptions gerees
 enum excep2{TEMPCRITIQUE,TEMPDESTRUCTION};
@@ -135,35 +167,6 @@ public:
     // chaine expliquant l'exception
     string text();
 };
-
-
-
-
-/*class CPU: public Composant {
-private:
-    int m_nbrCoeur;  //Nombre de coeur du processeur
-    int m_nbrThread;  //Nombre de thread du processeur
-public:
-    Composant();
-    Composant(int m_freq);
-};*/
-
-
-
-
-/*class GPU: public Composant {
-private:
-    int m_memory;  //Mémoire de la carte graphique
-public:
-    Composant();
-    Composant(int m_freq);
-    void benchmark(int m_freq);
-    void randomUse(int m_freq);
-};
-*/
-
-
-
 
 // exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
 class DigitalActuatorLED: public Device {
