@@ -120,7 +120,12 @@ void Ventilator::setSpeedAuto(int temp, double tension){
         }*/
     }
 }
+/*Ventilator operator++(Ventilator const& b){
+    Ventilator resultat(b);
+    b.setSpeed(b.getSpeed()+100);
 
+    return b;
+}*/
 void Ventilator::run()
 {
     while(1)
