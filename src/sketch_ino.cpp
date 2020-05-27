@@ -4,6 +4,8 @@
 
 #include <windows.h>
 
+#include <cmath>
+
 #define sleep(x) Sleep(1000 * (x))
 
 // la fonction d'initialisation d'arduino
@@ -22,6 +24,7 @@ void Board::setup(){
   pinMode(3, INPUT2);
   pinMode(4, INPUT2);
   pinMode(5, INPUT2);
+  pinMode(6, INPUT2);
 
 
 }
@@ -40,6 +43,8 @@ void Board::loop(){
   double freq;
 
   int tempProc;
+
+  int tempCold;
 
   static int cpt=0;
 
@@ -63,13 +68,29 @@ void Board::loop(){
     sprintf(buf,"Tension Processeur %f V",volt);
     Serial.println(buf);
 
-    freq=digitalRead(4)/(double)13107;
-    sprintf(buf,"Frequence %f GHz",freq);
+    freq=digitalRead(4)/(double)16384;
+    sprintf(buf,"Frequence CPU %f GHz",freq);
+    Serial.println(buf);
+
+    freq=digitalRead(6)/(double)6554;
+    sprintf(buf,"Frequence GPU %f GHz",freq);
     Serial.println(buf);
 
     tempProc=digitalRead(5);
     sprintf(buf,"Temperature Processeur %d(C)",tempProc);
     Serial.println(buf);
+
+    if (vitesse == 0){
+        tempCold = tempProc;
+        sprintf(buf,"Pas d'action des ventilateurs car le processeur a une temperature de %d(C) qui est inferieure a 51(C).",tempProc);
+        Serial.println(buf);
+    }
+    else {
+        tempCold = tempProc*exp(-((double)(vitesse/(double)5500))/10);
+        sprintf(buf,"Temperature Processeur apres refroidissement %d(C).",tempCold);
+        Serial.println(buf);
+    }
+
 
     if(cpt%5==0){
 
