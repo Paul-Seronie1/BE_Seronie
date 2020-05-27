@@ -27,7 +27,8 @@ int main(){
 
   TensionSensor voltmetre(DELAY);
   Ventilator ventilo(0, DELAY);
-  Composant CPU1(4, 1000);
+  CPU CPU1;
+  GPU GPU1;
   voltmetre.setProcesseur(&CPU1);
   ventilo.setCapteur(&voltmetre);
   ventilo.setProcesseur(&CPU1);
@@ -47,6 +48,7 @@ int main(){
   esp8266.pin(3, ventilo);
   esp8266.pin(4, CPU1);
   esp8266.pin(5, systeme1);
+  esp8266.pin(6, GPU1);
 
 
 
