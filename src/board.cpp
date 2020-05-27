@@ -29,10 +29,13 @@ int main(){
   Ventilator ventilo(0, DELAY);
   Composant CPU1(4, 1000);
   voltmetre.setProcesseur(&CPU1);
+  ventilo.setCapteur(&voltmetre);
+  ventilo.setProcesseur(&CPU1);
   AnalogSensorTemperature temperature(DELAY,TEMP);
 
   Ensemble systeme1(&CPU1, &ventilo, &temperature, &voltmetre);
   systeme1.initialisation();
+
 
 
   // branchement des capteurs actionneurs
@@ -43,6 +46,7 @@ int main(){
   esp8266.i2c(1,screen);
   esp8266.pin(3, ventilo);
   esp8266.pin(4, CPU1);
+  esp8266.pin(5, systeme1);
 
 
 
