@@ -106,7 +106,7 @@ void Ventilator::setSpeedAuto(int temp, double tension){
     }
     else
     {
-        if (110*(temp-50) > (int)5392*(tension-0.7))
+        if (110*(temp-50) > (int)5392*(tension-0.7)) //On regarde qui de la tension ou de la fréquence est critique
         {
             speed = 110*(temp-50);
         }
@@ -254,6 +254,7 @@ void Ensemble::run(){
         if (ptrmem!=NULL){
             *ptrmem=this->getTemp();
         }
+
         if (m_ventilo->getSpeed()==0){
             cout << "Aucune action des ventilateurs, la temperature ne va pas changer." << endl;
         }
