@@ -261,8 +261,8 @@ void Ensemble::run(){
         else {
             cout << "Le processeur va atteindre une temperature de " << this->getColdTemp() << " degres Celsius apres l'action des ventilateurs." << endl;
         }
-        /*
-        m_processeur->setFreqRand();
+
+       /* m_processeur->setFreqRand();
         m_capteurTension->setTension(m_processeur->getFreq());
         m_ventilo->setSpeedAuto(this->getTemp(), m_capteurTension->getTension());
         m_processeur->run();
