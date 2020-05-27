@@ -19,8 +19,9 @@ void Board::setup(){
   pinMode(1,INPUT2);
   pinMode(2, INPUT2);
   pinMode(0,OUTPUT);
-  pinMode(3, OUTPUT);
+  pinMode(3, INPUT2);
   pinMode(4, INPUT2);
+  pinMode(5, INPUT2);
 
 
 }
@@ -30,11 +31,15 @@ void Board::loop(){
 
   char buf[100];
 
-  int val;
+  int tempAmb;
 
   double volt;
 
+  int vitesse;
+
   double freq;
+
+  int tempProc;
 
   static int cpt=0;
 
@@ -46,23 +51,31 @@ void Board::loop(){
   for(i=0;i<10;i++){
 
     // lecture sur la pin 1 : capteur de temperature
-    val=analogRead(1);
-    sprintf(buf,"temperature %d",val);
+    tempAmb=analogRead(1);
+    sprintf(buf,"Temperature Ambiante %d(C)",tempAmb);
+    Serial.println(buf);
+
+    vitesse=digitalRead(3);
+    sprintf(buf,"Vitesse Ventilateur %d tr/min",vitesse);
     Serial.println(buf);
 
     volt=digitalRead(2)/(double)38102;
-    sprintf(buf,"tension %f",volt);
+    sprintf(buf,"Tension Processeur %f V",volt);
     Serial.println(buf);
 
     freq=digitalRead(4)/(double)13107;
-    sprintf(buf,"Frequence %f",freq);
+    sprintf(buf,"Frequence %f GHz",freq);
+    Serial.println(buf);
+
+    tempProc=digitalRead(5);
+    sprintf(buf,"Temperature Processeur %d(C)",tempProc);
     Serial.println(buf);
 
     if(cpt%5==0){
 
         // tous les 5 fois on affiche sur l ecran la temperature
 
-      sprintf(buf,"%d",val);
+      sprintf(buf,"%d",tempAmb);
 
       bus.write(1,buf,100);
 
