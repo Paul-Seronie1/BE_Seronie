@@ -250,19 +250,18 @@ void Ensemble::initialisation(){
 }
 
 void Ensemble::run(){
-    cout << "Ici" << endl;
     while (1){
         if (ptrmem!=NULL){
             *ptrmem=this->getTemp();
         }
         if (m_ventilo->getSpeed()==0){
-            cout << "Aucune action des ventilateurs, la temperature na va pas changer." << endl;
+            cout << "Aucune action des ventilateurs, la temperature ne va pas changer." << endl;
         }
         else {
             cout << "Le processeur va atteindre une temperature de " << this->getColdTemp() << " degres Celsius apres l'action des ventilateurs." << endl;
         }
-
-       /* m_processeur->setFreqRand();
+        /*
+        m_processeur->setFreqRand();
         m_capteurTension->setTension(m_processeur->getFreq());
         m_ventilo->setSpeedAuto(this->getTemp(), m_capteurTension->getTension());
         m_processeur->run();
@@ -340,4 +339,3 @@ void I2CActuatorScreen::run(){
     }
 
 }
-
