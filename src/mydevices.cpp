@@ -27,15 +27,17 @@ void AnalogSensorTemperature::setTempRand(int tempAmbiente){
     srand(time(NULL)*577);
     val = (int)(rand()/(double)RAND_MAX * (b-a) + a);
 }
-
-/*void AnalogSensorTemperature::run(){
+int AnalogSensorTemperature::getTemperature(){
+return val;
+}
+void AnalogSensorTemperature::run(){
   while(1){
     this->setTempRand(25);
     if(ptrmem!=NULL)
       *ptrmem=val;
     sleep(temps);
   }
-}*/
+}
 
 
 //class TensionSensor
@@ -57,7 +59,7 @@ void TensionSensor::setTension(double freq){
     val = freq*0.344*38102; //en mV
 
 }
-/*void TensionSensor::run()
+void TensionSensor::run()
 {
     while(1)
     {
@@ -68,14 +70,21 @@ void TensionSensor::setTension(double freq){
         }
         sleep(temps);
     }
-}*/
+}
 
 //class Ventilator
 Ventilator::Ventilator(bool m, int t):Device(),mode(m), temps(t)
 {
-    speed = 0;
+    speed =0;
+    processeur = new Composant(2.5, 1000);
+    capteur = new TensionSensor(2);
 }
-
+void Ventilator::setProcesseur(Composant *proces){
+    processeur = proces;
+}
+void Ventilator::setCapteur(TensionSensor *capt){
+    capteur = capt;
+}
 int Ventilator::getSpeed()
 {
     return speed;
@@ -90,7 +99,7 @@ void Ventilator::setSpeedManuel(int s)
         }
 }
 
-void Ventilator::setSpeedAuto(int temp, int tension){
+void Ventilator::setSpeedAuto(int temp, double tension){
     if (temp < 50 && tension < 0.7)
     {
         speed = 0;
@@ -105,32 +114,36 @@ void Ventilator::setSpeedAuto(int temp, int tension){
         {
             speed = (int)5392*(tension-0.7);
         }
-        if (speed > MAXVRPM)
+        /*if (speed > MAXVRPM)
         {
             speed = MAXVRPM;
-        }
+        }*/
     }
 }
 
-/*void Ventilator::run()
+void Ventilator::run()
 {
     while(1)
     {
+        if (mode)
+        {
+           cout << "Mode manuel" << endl;
+           this->setSpeedManuel(1000);
+
+        }
+        else
+        {
+            cout << "Mode auto" << endl;
+            this->setSpeedAuto(TEMP+((processeur->getTmax()-TEMP)*processeur->percentageUse())/(double)100, capteur->getTension()/(double)38102);
+        }
         if (ptrmem!=NULL)
         {
             *ptrmem = speed;
         }
-        if (mode)
-        {
-           cout << "Mode manuel, speed = " << speed << endl;
-        }
-        else
-        {
-            cout << "Mode auto, speed = " << speed << endl;
-        }
+
         sleep(temps);
     }
-}*/
+}
 
 
 //classe Composant
@@ -160,7 +173,7 @@ int Composant::getTmax() const
 
 int Composant::percentageUse()
 {
-    m_percentage=m_freq*20;
+    m_percentage=(m_freq*20)/(double)13107;
     return m_percentage;
 }
 
@@ -172,10 +185,15 @@ void Composant::setFreqRand(){
     int a = 0;
     int b = 5;
     srand(time(NULL)*577);
-    m_freq = 13107*((rand()/(double)RAND_MAX)*(b-a) + a); //En MHz
+    double c = 0.5;
+    double d = 1;
+    double coeff;
+    srand(time(NULL)*577);
+    coeff = ((rand()/(double)RAND_MAX)*(d-c) + c);
+    m_freq = coeff*(13107*((rand()/(double)RAND_MAX)*(b-a) + a)); //En MHz
 }
 
-/*void Composant::run(){
+void Composant::run(){
     sleep(1);
     while (1){
         this->setFreqRand();
@@ -185,7 +203,7 @@ void Composant::setFreqRand(){
         }
     sleep(2);
     }
-}*/
+}
 
 //Classe Ensemble
 
@@ -207,37 +225,23 @@ Ventilator *Ensemble::getVentilo(){
 AnalogSensorTemperature *Ensemble::getCapteurTemp(){
     return m_capteurTemp;
 }
-double Ensemble::calculCoeffA(){
-    double resultat;
-     if (m_processeur->percentageUse()>=10)
-    {
-        resultat=-1+(m_processeur->percentageUse()-10)*0.0111111111111;
-    }                                                       // avec a pourcentage d'utilisation du proc entre 1(10%) et 0 (100%)
-    else{
-        resultat=10-m_processeur->percentageUse();
-    }
-    return resultat;
-}
 
 
 double Ensemble::calculCoeffB(){
      double resultat;
-     if (m_processeur->percentageUse()>=10)
-    {
-        resultat=(double)(m_ventilo->getSpeed()/(double)5500)/10;
-    }  //   b pourcentage utilisaition des ventilateur entre 0(0%) et 0,1 (100%), Passer b de 0 à 0,2 si Tmax=115 pour descendre sous 100°C
-    else
-    {
-        resultat=0;
-    }
+        resultat=((double)(m_ventilo->getSpeed()/(double)5500))/10;
+    //   b pourcentage utilisaition des ventilateur entre 0(0%) et 0,1 (100%), Passer b de 0 à 0,2 si Tmax=115 pour descendre sous 100°C
     return resultat;
 }
 
 int Ensemble::getTemp(){
-    return TEMP+(m_processeur->getTmax()-TEMP)*m_processeur->percentageUse();
+    return m_capteurTemp->getTemperature()+((m_processeur->getTmax()-m_capteurTemp->getTemperature())*m_processeur->percentageUse())/(double)100;
 }
 int Ensemble::getColdTemp(){
-    return TEMP + (m_processeur->getTmax()-TEMP)*exp(-(this->calculCoeffA()+this->calculCoeffB()));
+    if (m_ventilo->getSpeed() == 0){
+        return this->getTemp();
+    }
+    return this->getTemp()*exp(-this->calculCoeffB());
 }
 void Ensemble::initialisation(){
     m_processeur->setFreqRand();
@@ -246,27 +250,29 @@ void Ensemble::initialisation(){
 }
 
 void Ensemble::run(){
+    cout << "Ici" << endl;
     while (1){
-
+        if (ptrmem!=NULL){
+            *ptrmem=this->getTemp();
+        }
+        if (m_ventilo->getSpeed()==0){
+            cout << "Aucune action des ventilateurs, la temperature na va pas changer." << endl;
+        }
+        else {
+            cout << "Le processeur va atteindre une temperature de " << this->getColdTemp() << " degres Celsius apres l'action des ventilateurs." << endl;
+        }
+        /*
         m_processeur->setFreqRand();
         m_capteurTension->setTension(m_processeur->getFreq());
         m_ventilo->setSpeedAuto(this->getTemp(), m_capteurTension->getTension());
-        m_capteurTemp->setTempRand(25);
-        if (m_processeur->ptrmem!=NULL){
-            m_processeur->*ptrmem = m_processeur->getFreq();
-        }
-        if (m_capteurTension->ptrmem!=NULL){
-            m_capteurTension->*ptrmem = m_capteurTension->getTension();
-        }
-        if (m_ventilo->ptrmem!=NULL){
-            m_ventilo->*ptrmem = m_ventilo->getSpeed();
-        }
-        if (m_capteurTemp->ptrmem!=NULL){
-            m_capteurTemp->*ptrmem = m_capteurTemp->getTemp();
-        }
-
+        m_processeur->run();
+        m_capteurTension->run();
+        m_ventilo->run(0, this->getTemp(), m_capteurTension->getTension());
+        m_capteurTemp->run();*/
         sleep(2);
     }
+
+
 }
 
 //Actuateur
