@@ -55,21 +55,22 @@ void Board::loop(){
     sprintf(buf,"Temperature Ambiante %d(C)",tempAmb);
     Serial.println(buf);
 
-    vitesse=digitalRead(3);
-    sprintf(buf,"Vitesse Ventilateur %d tr/min",vitesse);
-    Serial.println(buf);
-
-    volt=digitalRead(2)/(double)38102;
-    sprintf(buf,"Tension Processeur %f V",volt);
+    tempProc=digitalRead(5);
+    sprintf(buf,"Temperature Processeur %d(C)",tempProc);
     Serial.println(buf);
 
     freq=digitalRead(4)/(double)13107;
     sprintf(buf,"Frequence %f GHz",freq);
     Serial.println(buf);
 
-    tempProc=digitalRead(5);
-    sprintf(buf,"Temperature Processeur %d(C)",tempProc);
+    volt=digitalRead(2)/(double)38102;
+    sprintf(buf,"Tension Processeur %f V",volt);
     Serial.println(buf);
+
+    vitesse=digitalRead(3);
+    sprintf(buf,"Vitesse Ventilateur %d tr/min",vitesse);
+    Serial.println(buf);
+
 
     if(cpt%5==0){
 
