@@ -69,9 +69,10 @@ public:
     void setSpeedManuel(int s);
     void setSpeedAuto(int temp, double tension);
     virtual void run();
+    //Ventilator& operator++(Ventilator const& v);
 };
 
-
+//Ventilator& operator++(Ventilator const& v);
 
 
 
