@@ -8,11 +8,12 @@
 #include "core_simulation.h"
 #define MAXVRPM 5500
 
+//Représente la classe mère des processeurs (CPU/GPU)
 class Composant: public Device {
 
 protected:
     double m_freq;
-    int m_cycleVie;
+    int m_cycleVie; //usure du composant
     int m_tmax;
     int m_percentage;
     int m_nbComposants;
@@ -21,8 +22,6 @@ public:
     Composant();
     Composant(double f, int v);  // Faire virtual pure abstrait pour pas y toucher
     virtual ~Composant();
-    //virtual void benchmark(double m_freq);  // Création de classe abstraite avec utilisation de méthode virtuelle pure afin d'interdire l'utilisation de la classe composant
-    //virtual void randomUse(double m_freq);
     virtual double getFreq() const;
     virtual int getTmax() const;
     virtual int percentageUse(); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
@@ -51,7 +50,7 @@ public:
     virtual void run();
 
 };
-
+//Classe ventilateur
 class Ventilator: public Device {
 
 protected:
@@ -60,18 +59,18 @@ protected:
     int temps;
 
 public:
+    //Autres Device liés au ventilateur pour le réguler
     Composant *processeur;
     TensionSensor *capteur;
     Ventilator(bool m, int t);
     int getSpeed();
     void setProcesseur(Composant *proces);
     void setCapteur(TensionSensor *capt);
+    //diférents modes d'utilisation du ventiateur (manuel/auto)
     void setSpeedManuel(int s);
     void setSpeedAuto(int temp, double tension);
     virtual void run();
 };
-
-
 
 
 
@@ -96,10 +95,11 @@ public:
 };
 
 
-
+// Classe permettant de mettre en lien plusieurs device et de simuler le somportement du processeur régulé
 class Ensemble: public Device {
 
 protected:
+    //Différents Device le composant
     Composant *m_processeur;
     Ventilator *m_ventilo;
     AnalogSensorTemperature *m_capteurTemp;
@@ -107,9 +107,11 @@ protected:
 public:
     Ensemble(Composant *processeur, Ventilator *ventilo, AnalogSensorTemperature *capteurTemp, TensionSensor *capteurTension);
     virtual ~Ensemble();
+    //Différents assesseurs
     Composant *getProcesseur();
     Ventilator *getVentilo();
     AnalogSensorTemperature *getCapteurTemp();
+    //Partue modélisation mathématiques
     double calculCoeffB();
     int getTemp();
     int getColdTemp();
