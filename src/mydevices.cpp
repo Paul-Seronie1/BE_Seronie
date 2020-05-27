@@ -206,13 +206,12 @@ void CPU::setFreq(double freq){
 }
 
 void CPU::setFreqRand(){
-    int a = 0;
-    int b = 4;
+    int a = 1;
+    int b = 3;
     srand(time(NULL)*577);
-    double c = 0.5;
-    double d = 1;
+    double c = 0.6;
+    double d = 1.2;
     double coeff;
-    srand(time(NULL)*577);
     coeff = ((rand()/(double)RAND_MAX)*(d-c) + c);
     m_freq = coeff*(16384*((rand()/(double)RAND_MAX)*(b-a) + a)); //En MHz
 }
@@ -282,13 +281,12 @@ void GPU::setFreq(double freq){
 }
 
 void GPU::setFreqRand(){
-    int a = 0;
-    int b = 10;
-    srand(time(NULL)*577);
+    int a = 2;
+    int b = 6;
+    srand(time(NULL)*632);
     double c = 0.5;
-    double d = 1;
+    double d = 1.5;
     double coeff;
-    srand(time(NULL)*577);
     coeff = ((rand()/(double)RAND_MAX)*(d-c) + c);
     m_freq = coeff*(6554*((rand()/(double)RAND_MAX)*(b-a) + a)); //En MHz
 }
