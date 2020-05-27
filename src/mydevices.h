@@ -120,6 +120,20 @@ public:
 
 
 
+// exceptions gerees
+enum excep2{TEMPCRITIQUE,TEMPDESTRUCTION};
+class ComposantException{
+protected:
+    // numero de l'exception
+  int num;
+public:
+  ComposantException(int i):num(i){}
+    // recuperation du numero d'exception
+    int get();
+    // chaine expliquant l'exception
+    string text();
+};
+
 
 
 
