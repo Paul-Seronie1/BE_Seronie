@@ -43,7 +43,7 @@ void AnalogSensorTemperature::run(){
 //class TensionSensor
 TensionSensor::TensionSensor(int t):Device(),val(0), temps(t)
 {
-    m_processeur = new Composant(2.5, 1);
+    m_processeur = new CPU(2.5);
 }
 
 double TensionSensor::getTension(){
@@ -51,12 +51,12 @@ double TensionSensor::getTension(){
     return val;
 }
 
-void TensionSensor::setProcesseur(Composant *processeur){
+void TensionSensor::setProcesseur(CPU *processeur){
     m_processeur = processeur;
 }
 
 void TensionSensor::setTension(double freq){
-    val = freq*0.344*38102; //en mV
+    val = freq*0.43*38102; //en mV
 
 }
 void TensionSensor::run()
@@ -75,11 +75,11 @@ void TensionSensor::run()
 //class Ventilator
 Ventilator::Ventilator(bool m, int t):Device(),mode(m), temps(t)
 {
-    speed =0;
-    processeur = new Composant(2.5, 1000);
+    speed = 0;
+    processeur = new CPU(2.5);
     capteur = new TensionSensor(2);
 }
-void Ventilator::setProcesseur(Composant *proces){
+void Ventilator::setProcesseur(CPU *proces){
     processeur = proces;
 }
 void Ventilator::setCapteur(TensionSensor *capt){
@@ -129,7 +129,6 @@ void Ventilator::run()
         {
            cout << "Mode manuel" << endl;
            this->setSpeedManuel(1000);
-
         }
         else
         {
@@ -140,60 +139,85 @@ void Ventilator::run()
         {
             *ptrmem = speed;
         }
-
         sleep(temps);
     }
 }
 
 
 //classe Composant
-
-Composant::Composant() :Device(), m_freq(2.6), m_cycleVie(1000),m_tmax(100),m_percentage(50)     //Constructeur par défaut de la classe composant
-{
-    m_nbComposants++;
-}
-
-Composant::Composant(double f, int v) :Device(), m_freq(f), m_cycleVie(v), m_tmax(100), m_percentage(50)  //Constructeur surchargé de la classe composant, pas besoin de destructeur si on travaille sans pointeur
+Composant::Composant() :Device()    //Constructeur par défaut de la classe composant
 {
     m_nbComposants++;
 }
 
 Composant::~Composant(){m_nbComposants--;}
 
-double Composant::getFreq() const
-{
-    return m_freq/(double)13107;
+
+
+//Classe CPU héritant de Composant
+/*Cractéritiques de base d'un CPU
+Fréquence de fonctionnement  : 2GHz
+Fréquence Max : 4GHz
+Nombre de coeurs : 4
+Nombre de threads : 8
+Température Max : 100 °C
+Cycle de vie : 100
+*/
+CPU::CPU():Composant(), m_nbCoeurs(4), m_nbThreads(8){
+     m_freq = 2;
+     m_percentage =50;
+     m_cycleVie=100;
+     m_tmax=100;
 }
 
-int Composant::getTmax() const
+CPU::CPU(double frequence):Composant(), m_nbCoeurs(4), m_nbThreads(8){
+    m_freq = frequence;
+    m_percentage=50;
+    m_cycleVie=100;
+    m_tmax=100;
+}
+
+CPU::CPU(int coeurs, int threads):Composant(), m_nbCoeurs(coeurs), m_nbThreads(threads){
+    m_freq = 2;
+    m_percentage=50;
+    m_cycleVie=100;
+    m_tmax=100;
+}
+
+double CPU::getFreq()
+{
+    return m_freq/(double)16384;
+}
+
+int CPU::getTmax()
 {
     return m_tmax;
 }
 
 
-int Composant::percentageUse()
+int CPU::percentageUse()
 {
-    m_percentage=(m_freq*20)/(double)13107;
+    m_percentage=(m_freq*25)/(double)16364;
     return m_percentage;
 }
 
-void Composant::setFreq(double freq){
+void CPU::setFreq(double freq){
     m_freq = freq;
 }
 
-void Composant::setFreqRand(){
+void CPU::setFreqRand(){
     int a = 0;
-    int b = 5;
+    int b = 4;
     srand(time(NULL)*577);
     double c = 0.5;
     double d = 1;
     double coeff;
     srand(time(NULL)*577);
     coeff = ((rand()/(double)RAND_MAX)*(d-c) + c);
-    m_freq = coeff*(13107*((rand()/(double)RAND_MAX)*(b-a) + a)); //En MHz
+    m_freq = coeff*(16384*((rand()/(double)RAND_MAX)*(b-a) + a)); //En MHz
 }
 
-void Composant::run(){
+void CPU::run(){
     sleep(1);
     while (1){
         this->setFreqRand();
@@ -205,18 +229,92 @@ void Composant::run(){
     }
 }
 
+//Classe GPU héritant de composant
+/*Cractéritiques de base d'un GPU
+Fréquence de fonctionnement  : 3GHz
+Fréquence Max : 10GHz
+Mémoire : 8 (en Go)
+Température Max : 80 °C
+Cycle de vie : 60
+*/
+GPU::GPU():Composant(), m_memory(8){
+    m_freq = 3;
+    m_tmax = 80;
+    m_percentage = 30;
+    m_cycleVie = 60;
+}
+
+GPU::GPU(double frequence):Composant(), m_memory(8){
+    m_freq = frequence;
+    m_tmax = 80;
+    m_percentage = 30;
+    m_cycleVie = 60;
+
+}
+
+GPU::GPU(int memory):Composant(), m_memory(memory){
+    m_freq = 3;
+    m_tmax = 80;
+    m_percentage = 30;
+    m_cycleVie = 60;
+
+}
+
+double GPU::getFreq()
+{
+    return m_freq/(double)6554;
+}
+
+int GPU::getTmax()
+{
+    return m_tmax;
+}
+
+
+int GPU::percentageUse()
+{
+    m_percentage=(m_freq*10)/(double)6554;
+    return m_percentage;
+}
+
+void GPU::setFreq(double freq){
+    m_freq = freq;
+}
+
+void GPU::setFreqRand(){
+    int a = 0;
+    int b = 10;
+    srand(time(NULL)*577);
+    double c = 0.5;
+    double d = 1;
+    double coeff;
+    srand(time(NULL)*577);
+    coeff = ((rand()/(double)RAND_MAX)*(d-c) + c);
+    m_freq = coeff*(6554*((rand()/(double)RAND_MAX)*(b-a) + a)); //En MHz
+}
+
+void GPU::run(){
+    sleep(1);
+    while (1){
+        this->setFreqRand();
+        if (ptrmem!=NULL)
+        {
+            *ptrmem = m_freq;
+        }
+    sleep(2);
+    }
+}
 //Classe Ensemble
 
-Ensemble::Ensemble(Composant *processeur, Ventilator *ventilo, AnalogSensorTemperature *capteurTemp, TensionSensor *capteurTension):Device(),
+Ensemble::Ensemble(CPU *processeur, Ventilator *ventilo, AnalogSensorTemperature *capteurTemp, TensionSensor *capteurTension):Device(),
 m_processeur(processeur),m_ventilo(ventilo),
 m_capteurTemp(capteurTemp), m_capteurTension(capteurTension)
 {
-
 }
 
 Ensemble::~Ensemble(){}
 
-Composant *Ensemble::getProcesseur(){
+CPU *Ensemble::getProcesseur(){
     return m_processeur;
 }
 Ventilator *Ensemble::getVentilo(){
@@ -254,28 +352,9 @@ void Ensemble::run(){
         if (ptrmem!=NULL){
             *ptrmem=this->getTemp();
         }
-
-        if (m_ventilo->getSpeed()==0){
-            cout << "Aucune action des ventilateurs, la temperature ne va pas changer." << endl;
-        }
-        else {
-            cout << "Le processeur va atteindre une temperature de " << this->getColdTemp() << " degres Celsius apres l'action des ventilateurs." << endl;
-        }
-        /*
-        m_processeur->setFreqRand();
-        m_capteurTension->setTension(m_processeur->getFreq());
-        m_ventilo->setSpeedAuto(this->getTemp(), m_capteurTension->getTension());
-        m_processeur->run();
-        m_capteurTension->run();
-        m_ventilo->run(0, this->getTemp(), m_capteurTension->getTension());
-        m_capteurTemp->run();*/
         sleep(2);
     }
-
-
 }
-
-
 
 
 // class ComposantException
@@ -290,27 +369,13 @@ string ComposantException::text(){
   return s;
 }
 
-
-
-
-
-
-
-
 //Actuateur
-
-
-
-
-
 
 //classe DigitalActuatorLED
 
 DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
 
 }
-
-
 
 void DigitalActuatorLED::run(){
 
