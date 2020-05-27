@@ -8,21 +8,6 @@
 #include "core_simulation.h"
 #define MAXVRPM 5500
 
-class Ventilator: public Device {
-
-protected:
-    int speed;
-    bool mode; //0 auto vs 1 manual
-    int temps;
-
-public:
-    Ventilator(bool m, int t);
-    int getSpeed();
-    void setSpeedManuel(int s);
-    void setSpeedAuto(int temp, int tension);
-};
-
-
 class Composant: public Device {
 
 protected:
@@ -43,25 +28,7 @@ public:
     virtual int percentageUse(); // Convertit la fréquence de fonctionnement en un pourcentage d'utilisation
     virtual void setFreq(double freq);
     virtual void setFreqRand();
-};
-
-
-// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
-class AnalogSensorTemperature: public Device {
-protected:
-  // fait osciller la valeur du cpateur de 1
-  int alea;
-  // valeur de temperature mesuree
-  int val;
-  // temps entre 2 prises de valeurs
-  int temps;
-
-public:
-  //constructeur ne pas oublier d'initialiser la classe mere
-  AnalogSensorTemperature(int d, int t);
-  virtual ~AnalogSensorTemperature();
-  void setTempRand(int tempAmbiente);
-  // thread representant le capteur et permettant de fonctionner independamment de la board
+    virtual void run();
 };
 
 //Capteur de tension (ou plus communément Voltmètre)
@@ -81,8 +48,54 @@ public:
     double getTension();
     void setTension(double freq);
     void setProcesseur(Composant *processeur);
+    virtual void run();
 
 };
+
+class Ventilator: public Device {
+
+protected:
+    int speed;
+    bool mode; //0 auto vs 1 manual
+    int temps;
+
+public:
+    Composant *processeur;
+    TensionSensor *capteur;
+    Ventilator(bool m, int t);
+    int getSpeed();
+    void setProcesseur(Composant *proces);
+    void setCapteur(TensionSensor *capt);
+    void setSpeedManuel(int s);
+    void setSpeedAuto(int temp, double tension);
+    virtual void run();
+};
+
+
+
+
+
+// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
+class AnalogSensorTemperature: public Device {
+protected:
+  // fait osciller la valeur du cpateur de 1
+  int alea;
+  // valeur de temperature mesuree
+  int val;
+  // temps entre 2 prises de valeurs
+  int temps;
+
+public:
+  //constructeur ne pas oublier d'initialiser la classe mere
+  AnalogSensorTemperature(int d, int t);
+  virtual ~AnalogSensorTemperature();
+  void setTempRand(int tempAmbiente);
+  int getTemperature();
+  virtual void run();
+  // thread representant le capteur et permettant de fonctionner independamment de la board
+};
+
+
 
 class Ensemble: public Device {
 
@@ -97,12 +110,11 @@ public:
     Composant *getProcesseur();
     Ventilator *getVentilo();
     AnalogSensorTemperature *getCapteurTemp();
-    double calculCoeffA();
     double calculCoeffB();
     int getTemp();
     int getColdTemp();
     void initialisation();
-    void run();
+    virtual void run();
 
 };
 
