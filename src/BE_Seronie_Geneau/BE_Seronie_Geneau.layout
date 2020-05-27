@@ -2,59 +2,24 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
-<<<<<<< HEAD
 	<File name="..\board.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="639" topLine="19" />
-=======
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="..\sketch_ino.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="990" topLine="54" />
+			<Cursor1 position="0" topLine="63" />
 		</Cursor>
 	</File>
 	<File name="..\mydevices.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3839" topLine="174" />
->>>>>>> 5e2876988c45c380a5f4dd4eea9621e7a831610a
+			<Cursor1 position="5674" topLine="240" />
 		</Cursor>
 	</File>
-	<File name="..\core_simulation.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\core_simulation.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="187" topLine="0" />
-		</Cursor>
-	</File>
-<<<<<<< HEAD
-	<File name="..\core_simulation.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2446" topLine="51" />
-=======
-	<File name="..\mydevices.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3003" topLine="99" />
->>>>>>> 5e2876988c45c380a5f4dd4eea9621e7a831610a
-		</Cursor>
-	</File>
-	<File name="..\board.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-<<<<<<< HEAD
-			<Cursor1 position="2490" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\mydevices.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4542" topLine="205" />
-=======
-			<Cursor1 position="574" topLine="22" />
->>>>>>> 5e2876988c45c380a5f4dd4eea9621e7a831610a
-		</Cursor>
-	</File>
-	<File name="..\core_simulation.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-<<<<<<< HEAD
-			<Cursor1 position="2441" topLine="126" />
-=======
-			<Cursor1 position="2490" topLine="88" />
->>>>>>> 5e2876988c45c380a5f4dd4eea9621e7a831610a
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
