@@ -124,34 +124,26 @@ public:
 
 
 /*class CPU: public Composant {
-
 private:
     int m_nbrCoeur;  //Nombre de coeur du processeur
     int m_nbrThread;  //Nombre de thread du processeur
-
-
 public:
     Composant();
     Composant(int m_freq);
-
 };*/
 
 
 
 
 /*class GPU: public Composant {
-
 private:
     int m_memory;  //Mémoire de la carte graphique
-
-
 public:
     Composant();
     Composant(int m_freq);
     void benchmark(int m_freq);
     void randomUse(int m_freq);
 };
-
 */
 
 
